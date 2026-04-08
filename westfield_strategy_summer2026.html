@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Westfield — Ruta Estratégica Summer 2026 | ADCOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--amarillo:#FFC000;--negro:#000;--gris-oscuro:#4F4F4F;--gris-medio:#9E9E9E;--gris-claro:#F9F9F9;--gris-borde:#EAEAEA;--blanco:#FFF;--radius:8px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--blanco);color:var(--gris-oscuro);overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4,h5,.bold{font-weight:700;color:var(--negro)}
+.light-text{font-weight:300;color:var(--gris-oscuro)}
+#presentation-container{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:none;padding:60px 80px 100px;background:var(--blanco);flex-direction:column;transition:opacity .4s;overflow-y:auto}
+.slide.active{display:flex;opacity:1}
+.slide-inner{width:100%;max-width:1200px;margin:auto;display:flex;flex-direction:column}
+.slide-top-section{display:flex;gap:40px;margin-bottom:28px;align-items:flex-start;width:100%}
+.slide-title-col{flex:0 0 auto}
+.slide-desc-col{flex:1;padding-top:5px}
+.slide-header{background:var(--amarillo);padding:14px 36px;border-radius:var(--radius);width:max-content;white-space:nowrap}
+.slide-header h2{margin:0;font-size:1.7rem;text-transform:uppercase;letter-spacing:-.5px;line-height:1.2}
+.slide-desc-col .subtext{font-weight:700;color:var(--gris-medio);font-size:.82rem;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.slide-desc-col .body-text{font-weight:300;font-style:italic;font-size:.95rem;color:var(--gris-oscuro)}
+.content-area{width:100%;text-align:left}
+.slide-cover{background:var(--gris-claro)}.slide-cover .slide-inner{align-items:center;text-align:center}
+.slide-cover h1{font-size:3.6rem;margin-bottom:12px;line-height:1.1;text-transform:uppercase;letter-spacing:-1px}
+.slide-cover .body-text{font-size:1.2rem;max-width:600px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.stats-grid.col3{grid-template-columns:repeat(3,1fr)}
+.stat-card{background:var(--gris-claro);padding:26px 18px;border-radius:var(--radius);text-align:center;border-left:4px solid var(--amarillo)}
+.stat-val{font-weight:700;font-size:2.5rem;color:var(--negro);line-height:1;display:block;margin-bottom:6px}
+.stat-label{font-weight:600;font-size:.82rem;color:var(--gris-oscuro)}
+.stat-sub{font-weight:300;font-size:.72rem;color:var(--gris-medio);margin-top:3px}
+.timeline-container{margin-top:14px;border-left:2px solid var(--gris-borde);padding-left:28px;position:relative}
+.timeline-item{margin-bottom:16px;position:relative;background:var(--gris-claro);padding:16px 20px;border-radius:var(--radius);border:1px solid var(--gris-borde)}
+.timeline-item::before{content:'';position:absolute;left:-35px;top:20px;width:12px;height:12px;background:var(--amarillo);border-radius:50%;border:3px solid var(--blanco);box-shadow:0 0 0 2px var(--gris-borde)}
+.timeline-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;flex-wrap:wrap;gap:6px}
+.timeline-item h3{font-size:1rem;margin:0}
+.timeline-tags{display:flex;gap:5px;flex-wrap:wrap}
+.tl-tag{font-size:.68rem;font-weight:600;padding:3px 9px;border-radius:50px;background:var(--blanco);color:var(--negro);border:1px solid var(--gris-medio)}
+.tl-tag.highlight{background:var(--negro);color:var(--amarillo);border:none}
+.mix-interactive{display:flex;gap:20px;margin-top:14px;align-items:stretch}
+.mix-tabs{flex:0 0 240px;display:flex;flex-direction:column;gap:7px}
+.mix-tab{background:var(--blanco);border:1px solid var(--gris-borde);padding:12px 14px;border-radius:var(--radius);text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s;font-family:'Poppins',sans-serif;font-weight:600;color:var(--negro);font-size:.9rem}
+.mix-tab .pct{font-size:1rem;color:var(--negro)}
+.mix-tab:hover{background:var(--gris-claro)}
+.mix-tab.active{background:var(--negro);color:var(--blanco);border-color:var(--negro);border-left:6px solid var(--amarillo)}
+.mix-tab.active .pct{color:var(--amarillo)}
+.mix-panel-container{flex:1;background:var(--gris-claro);border:1px solid var(--gris-borde);border-radius:var(--radius);padding:22px;position:relative}
+.mix-panel{display:none;animation:fadeIn .3s}.mix-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.panel-header-badge{font-size:1.1rem;color:var(--amarillo);background:var(--negro);padding:4px 12px;display:inline-block;border-radius:4px;margin-bottom:10px;font-weight:700}
+.panel-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.panel-box{background:var(--blanco);padding:12px 16px;border-left:4px solid var(--amarillo);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.panel-box h5{font-size:.68rem;text-transform:uppercase;color:var(--gris-medio);margin-bottom:3px;letter-spacing:.5px}
+.panel-box p{margin:0;font-size:.85rem;color:var(--gris-oscuro);font-weight:300}
+.journey-container{position:relative;padding-left:20px;margin-top:14px}
+.journey-container::before{content:'';position:absolute;left:5px;top:18px;bottom:18px;width:2px;background:var(--gris-borde);z-index:1}
+.acc-item{background:var(--gris-claro);border-radius:4px;overflow:hidden;transition:background .2s;margin-bottom:9px;position:relative;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.02);border:1px solid var(--gris-borde)}
+.acc-item::before{content:'';position:absolute;left:-19px;top:18px;width:8px;height:8px;background:var(--blanco);border:2px solid var(--gris-medio);border-radius:50%;z-index:3;transition:all .2s}
+.acc-item.open{background:var(--blanco);border-color:var(--amarillo);box-shadow:0 4px 15px rgba(0,0,0,.05)}
+.acc-item.open::before{border-color:var(--amarillo);background:var(--amarillo);box-shadow:0 0 0 3px rgba(255,192,0,.2)}
+.acc-header{padding:12px 18px;font-weight:600;font-size:.9rem;color:var(--negro);display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.acc-icon{font-weight:300;font-size:1.3rem;color:var(--gris-oscuro)}
+.acc-content{max-height:0;padding:0 18px;opacity:0;transition:all .3s;font-weight:300;font-size:.85rem;color:var(--gris-oscuro);overflow:hidden}
+.acc-item.open .acc-content{max-height:1200px;padding:0 18px 18px;opacity:1}
+.j-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px;border-top:1px dashed var(--gris-borde);padding-top:12px}
+.j-box{background:var(--gris-claro);padding:10px;border-radius:6px;font-size:.82rem;line-height:1.4}
+.j-box h5{font-size:.68rem;text-transform:uppercase;color:var(--gris-medio);margin-bottom:3px;letter-spacing:.5px}
+.j-box p{margin:0;font-weight:400;color:var(--negro)}
+.j-box.highlight{background:#fffdf5;border:1px solid var(--amarillo);display:flex;flex-direction:column;justify-content:center}
+.j-box.highlight p{font-size:1.4rem;font-weight:700;color:var(--negro)}
+.claim-box{background:var(--negro);border-radius:var(--radius);padding:14px 20px;margin-top:14px;border-left:4px solid var(--amarillo)}
+.claim-box p{font-size:.88rem;color:var(--blanco);font-weight:300;line-height:1.6;margin:0}
+.claim-box strong{color:var(--amarillo)}
+.claim-box .note{color:rgba(255,255,255,.5);font-size:.78rem}
+.budget-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:14px}
+.budget-table thead tr{background:var(--negro);color:var(--amarillo)}
+.budget-table th{padding:8px 10px;text-align:left;font-weight:600}
+.budget-table th:not(:first-child){text-align:right}
+.budget-table td{padding:7px 10px;border-bottom:1px solid var(--gris-borde)}
+.budget-table td:not(:first-child){text-align:right}
+.budget-table tbody tr:nth-child(even){background:var(--gris-claro)}
+.budget-table tfoot tr{background:var(--negro);color:var(--amarillo);font-weight:700}
+.budget-table tfoot td{padding:8px 10px;border:none}
+.slide-section{background:var(--negro)!important}
+.slide-section .slide-inner{align-items:center;justify-content:center;text-align:center;min-height:60vh}
+.slide-section h1{color:var(--blanco);font-size:2.8rem;text-transform:uppercase;margin-bottom:8px}
+.slide-section .section-sub{color:var(--amarillo);font-weight:300;font-style:italic;font-size:1.1rem}
+.nav-controls{position:fixed;bottom:32px;left:80px;display:flex;gap:10px;z-index:100}
+.nav-btn{background:var(--gris-claro);color:var(--negro);border:1px solid var(--gris-medio);padding:9px 20px;font-family:'Poppins',sans-serif;font-weight:500;cursor:pointer;border-radius:4px;transition:all .2s;font-size:.82rem}
+.nav-btn:hover{background:var(--negro);color:var(--amarillo);border-color:var(--negro)}
+.nav-btn:disabled{background:var(--gris-claro);color:var(--gris-medio);border-color:var(--gris-claro);cursor:not-allowed}
+.progress-bar{position:fixed;bottom:0;left:0;height:5px;background:var(--amarillo);transition:width .3s;z-index:1001}
+.index-toggle-btn{position:fixed;top:28px;right:60px;background:var(--negro);color:var(--amarillo);border:none;padding:9px 18px;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;z-index:2000;box-shadow:0 4px 15px rgba(0,0,0,.1);transition:transform .2s,background .2s;display:flex;align-items:center;gap:6px}
+.index-toggle-btn:hover{transform:translateY(-2px);background:var(--gris-oscuro)}
+.index-modal{position:fixed;inset:0;background:rgba(255,255,255,.96);backdrop-filter:blur(5px);z-index:2001;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity .3s;overflow-y:auto;padding:40px 20px}
+.index-modal.open{opacity:1;pointer-events:all}
+.index-list{list-style:none;padding:0;width:100%;max-width:900px;display:grid;grid-template-columns:1fr 1fr;gap:3px 20px}
+.index-list li{font-size:.82rem;font-weight:600;color:var(--gris-oscuro);padding:7px 12px;margin-bottom:0;border-radius:var(--radius);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.index-list li::before{content:'→';color:var(--amarillo);font-weight:700;opacity:0;transform:translateX(-8px);transition:all .15s;font-size:.8rem}
+.index-list li:hover{background:var(--negro);color:var(--blanco)}
+.index-list li:hover::before{opacity:1;transform:translateX(0)}
+.index-list li.idx-section{pointer-events:none}
+.index-list li.idx-section::before{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px}
+@media(max-width:992px){.slide{padding:40px 40px 100px}.slide-top-section{flex-direction:column;gap:10px;margin-bottom:18px}.slide-header{white-space:normal;width:100%}.stats-grid,.stats-grid.col3{grid-template-columns:1fr}.mix-interactive{flex-direction:column}.mix-tabs{flex-direction:row;flex-wrap:wrap}.j-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
+@media(max-width:576px){.slide{padding:30px 20px 90px}.slide-cover h1{font-size:2.4rem}.slide-header h2{font-size:1.2rem}.j-grid{grid-template-columns:1fr}.nav-controls{left:20px;bottom:20px}.index-toggle-btn{top:20px;right:20px;padding:8px 14px}}
+</style>
+</head>
+<body>
+<button class="index-toggle-btn" onclick="toggleIndex()">☰</button>
+<div class="index-modal" id="indexModal">
+<div style="display:flex;justify-content:space-between;align-items:center;width:100%;max-width:900px;margin-bottom:12px">
+<h2 style="font-size:1.2rem;margin:0;text-transform:uppercase">Índice</h2>
+<button onclick="toggleIndex()" style="background:var(--negro);color:var(--amarillo);border:none;width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:700">✕</button>
+</div>
+<ul class="index-list">
+<li class="idx-section" style="grid-column:1/-1;background:var(--gris-claro);font-size:.7rem;color:var(--gris-medio);text-transform:uppercase;letter-spacing:1px;padding:6px 12px;cursor:default;pointer-events:none;margin-top:4px">Contexto & Benchmark</li>
+<li onclick="goToSlide(0)">Portada</li>
+<li onclick="goToSlide(1)">Agenda</li>
+<li onclick="goToSlide(2)">Contexto del Intake</li>
+<li onclick="goToSlide(3)">Benchmark: Meta vs Google</li>
+<li onclick="goToSlide(4)">Posición CPA actual</li>
+<li onclick="goToSlide(5)">Estacionalidad + Competencia</li>
+<li onclick="goToSlide(6)">Diagnóstico y Recomendaciones</li>
+<li class="idx-section" style="grid-column:1/-1;background:var(--negro);font-size:.7rem;color:var(--amarillo);text-transform:uppercase;letter-spacing:1px;padding:6px 12px;cursor:default;pointer-events:none;margin-top:4px;border-radius:4px">B2C — MBA Online</li>
+<li onclick="goToSlide(8)">Calendario de Campañas</li>
+<li onclick="goToSlide(9)">Mix de Medios</li>
+<li onclick="goToSlide(10)">Flow de Inversión B2C</li>
+<li onclick="goToSlide(11)">Diferenciación vs Spring</li>
+<li class="idx-section" style="grid-column:1/-1;background:var(--negro);font-size:.7rem;color:var(--amarillo);text-transform:uppercase;letter-spacing:1px;padding:6px 12px;cursor:default;pointer-events:none;margin-top:4px;border-radius:4px">STEM</li>
+<li onclick="goToSlide(13)">Calendario e Info Sessions</li>
+<li onclick="goToSlide(14)">Flow de Inversión STEM</li>
+<li onclick="goToSlide(15)">Volumen y Acciones</li>
+<li class="idx-section" style="grid-column:1/-1;background:var(--negro);font-size:.7rem;color:var(--amarillo);text-transform:uppercase;letter-spacing:1px;padding:6px 12px;cursor:default;pointer-events:none;margin-top:4px;border-radius:4px">Transversales</li>
+<li onclick="goToSlide(17)">Ángulos de Venta</li>
+<li onclick="goToSlide(18)">Aplicación por Línea y Medio</li>
+<li onclick="goToSlide(19)">Testing Creativo</li>
+<li onclick="goToSlide(20)">Reactivación de Leads</li>
+<li onclick="goToSlide(21)">Experimentación</li>
+<li onclick="goToSlide(22)">Próximos Pasos</li>
+</ul>
+</div>
+
+<div id="presentation-container">
+
+<!-- S0: PORTADA -->
+<div class="slide slide-cover active"><div class="slide-inner">
+<div style="background:var(--amarillo);height:6px;width:80px;margin:0 auto 30px"></div>
+<h1>RUTA ESTRATÉGICA<br>WESTFIELD</h1>
+<div style="background:var(--amarillo);height:6px;width:80px;margin:25px auto"></div>
+<p class="body-text">Estrategia B2C & STEM — Intake Summer 2026</p>
+<p style="margin-top:28px;font-weight:700;color:var(--gris-medio);font-size:.88rem;letter-spacing:1px;">21 MARZO – 11 JULIO 2026</p>
+</div></div>
+
+<!-- S1: AGENDA -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section">
+<div class="slide-title-col"><div class="slide-header"><h2>AGENDA</h2></div></div>
+<div class="slide-desc-col"><p class="subtext">TEMAS A TRATAR</p><p class="body-text">Recorrido completo por la estrategia Summer 2026 para los dos segmentos de Westfield.</p></div>
+</div>
+<div class="content-area"><div class="two-col">
+<div>
+<!-- CONTEXTO -->
+<div style="background:var(--gris-claro);border-radius:var(--radius);padding:18px 22px;border:1px solid var(--gris-borde);margin-bottom:14px">
+<p style="font-size:.72rem;font-weight:700;color:var(--gris-medio);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Contexto</p>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--negro);color:var(--amarillo);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">00</span><p style="color:var(--negro);font-weight:400;font-size:.85rem;margin:0">Panorama general, retos y oportunidades del intake</p></div>
+</div>
+<!-- B2C -->
+<div style="background:var(--negro);border-radius:var(--radius);padding:18px 22px">
+<p style="font-size:.72rem;font-weight:700;color:var(--amarillo);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">B2C — MBA Online</p>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--amarillo);color:var(--negro);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">01</span><p style="color:var(--blanco);font-weight:300;font-size:.85rem;margin:0">Calendario de 3 campañas + Info Sessions</p></div>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--amarillo);color:var(--negro);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">02</span><p style="color:var(--blanco);font-weight:300;font-size:.85rem;margin:0">Mix de medios: LinkedIn + Meta</p></div>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--amarillo);color:var(--negro);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">03</span><p style="color:var(--blanco);font-weight:300;font-size:.85rem;margin:0">Flow de inversión y proyección</p></div>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--amarillo);color:var(--negro);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">04</span><p style="color:var(--blanco);font-weight:300;font-size:.85rem;margin:0">Diferenciación vs Spring 2026</p></div>
+</div></div>
+</div>
+<div>
+<!-- STEM -->
+<div style="background:var(--negro);border-radius:var(--radius);padding:18px 22px;margin-bottom:14px">
+<p style="font-size:.72rem;font-weight:700;color:var(--amarillo);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">STEM</p>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--amarillo);color:var(--negro);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">05</span><p style="color:var(--blanco);font-weight:300;font-size:.85rem;margin:0">Calendario, presupuesto e Info Sessions</p></div>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--amarillo);color:var(--negro);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">06</span><p style="color:var(--blanco);font-weight:300;font-size:.85rem;margin:0">Flow de inversión y proyección</p></div>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--amarillo);color:var(--negro);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">07</span><p style="color:var(--blanco);font-weight:300;font-size:.85rem;margin:0">Plan de volumen y acciones de mejora</p></div>
+</div></div>
+<!-- TRANSVERSALES -->
+<div style="background:var(--gris-claro);border-radius:var(--radius);padding:18px 22px;border-left:4px solid var(--amarillo)">
+<p style="font-size:.72rem;font-weight:700;color:var(--gris-medio);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Transversales</p>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--negro);color:var(--amarillo);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">08</span><p style="color:var(--negro);font-weight:400;font-size:.85rem;margin:0">Reactivación de leads antiguos</p></div>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--negro);color:var(--amarillo);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">09</span><p style="color:var(--negro);font-weight:400;font-size:.85rem;margin:0">Acciones experimentales quincenales</p></div>
+<div style="display:flex;align-items:flex-start;gap:10px"><span style="background:var(--negro);color:var(--amarillo);font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:3px;flex-shrink:0">10</span><p style="color:var(--negro);font-weight:400;font-size:.85rem;margin:0">Próximos pasos y compromisos</p></div>
+</div></div>
+</div>
+</div></div>
+</div></div>
+
+<!-- S2: CONTEXTO -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>CONTEXTO</h2></div></div><div class="slide-desc-col"><p class="subtext">INTAKE SUMMER 2026</p><p class="body-text">Panorama general, retos clave y oportunidades del intake más competitivo del año.</p></div></div>
+<div class="content-area">
+<div class="stats-grid col3">
+<div class="stat-card"><span class="stat-val">2</span><span class="stat-label">Segmentos activos</span><span class="stat-sub">B2C (MBA Online) + STEM</span></div>
+<div class="stat-card"><span class="stat-val">4</span><span class="stat-label">Mercados</span><span class="stat-sub">México · Perú · USA · Colombia</span></div>
+<div class="stat-card"><span class="stat-val">Summer</span><span class="stat-label">Convocatoria más conocida</span><span class="stat-sub">Pico de búsqueda MBA</span></div>
+</div>
+<div class="claim-box" style="margin-top:20px"><p>El insumo <strong>B2B se agota a principios de junio</strong>, la estrategia B2C debe sostener y acelerar el volumen de leads con <strong>diferenciación clara frente a Spring</strong>, eventos especiales y comunicaciones frescas.</p></div>
+<div class="journey-container" style="margin-top:20px">
+<div class="acc-item open"><div class="acc-header" onclick="toggleAcc(this)"><span>Retos identificados por Westfield</span><span class="acc-icon">−</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr">
+<div class="j-box"><h5>VOLUMEN</h5><p>Mayor dolor: más leads sin sacrificar perfilación.</p></div>
+<div class="j-box"><h5>EXPERIMENTACIÓN</h5><p>Falta pruebas constantes de nuevos formatos y fuentes.</p></div>
+<div class="j-box"><h5>LEADS ANTIGUOS</h5><p>Matrículas vienen de intakes anteriores: hay que reactivarlos.</p></div>
+<div class="j-box"><h5>DIFERENCIACIÓN</h5><p>Comunicaciones deben marcar distancia frente a Spring.</p></div>
+</div></div></div>
+</div></div>
+</div></div>
+
+<!-- ===== BENCHMARK SECTION (4 slides) ===== -->
+
+<!-- SB1: BENCH - META vs GOOGLE (tabs interactivos) -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>BENCHMARK DIGITAL</h2></div></div><div class="slide-desc-col"><p class="subtext">META ADS · GOOGLE ADS · EDUCACIÓN 2025</p><p class="body-text">KPIs de referencia del vertical Education en EE.UU. para calibrar expectativas y objetivos.</p></div></div>
+<div class="content-area">
+<div class="mix-interactive">
+<div class="mix-tabs">
+<button class="mix-tab active" onclick="showBench('bmeta',this)"><span>Meta Ads</span><span class="pct">CPL $19</span></button>
+<button class="mix-tab" onclick="showBench('bgoogle',this)"><span>Google Ads</span><span class="pct">CPL $90</span></button>
+</div>
+<div class="mix-panel-container">
+<!-- META -->
+<div class="mix-panel active" id="panel-bmeta">
+<span class="panel-header-badge">Meta Ads — Educación 2025</span>
+<div class="stats-grid" style="margin-top:12px">
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">$19.27</span><span class="stat-label">CPL Educación</span><span class="stat-sub">Promedio anual 2025</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">$1.92</span><span class="stat-label">CPC Lead Ads</span><span class="stat-sub">↑ desde $1.88 en 2024</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">13.58%</span><span class="stat-label">CVR Educación</span><span class="stat-sub">2do mejor vertical Meta</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">2.53%</span><span class="stat-label">CTR Lead Ads</span><span class="stat-sub">Superior al promedio</span></div>
+</div>
+<table class="budget-table" style="margin-top:12px">
+<thead><tr><th>Métrica</th><th>Educación</th><th>All Industries</th><th>Diferencia</th></tr></thead>
+<tbody>
+<tr style="background:var(--amarillo)"><td style="font-weight:700">CPL</td><td style="font-weight:700">$19.27</td><td style="font-weight:700">$41.53</td><td style="color:#4CAF50;font-weight:700">-54%</td></tr>
+<tr><td>CPC (Lead Ads)</td><td>$1.92</td><td>$1.72</td><td style="color:#EF5350">+12%</td></tr>
+<tr><td>CVR</td><td>13.58%</td><td>8.78%</td><td style="color:#4CAF50">+55%</td></tr>
+<tr><td>CTR (Lead Ads)</td><td>2.53%</td><td>0.90%</td><td style="color:#4CAF50">+181%</td></tr>
+<tr><td>CPM</td><td>&lt; $8</td><td>$13.48</td><td style="color:#4CAF50">-41%</td></tr>
+</tbody></table>
+<div class="claim-box" style="margin-top:12px"><p>Meta ofrece un CPL de educación <strong>54% inferior al promedio global</strong> ($19 vs $42). Sin embargo, la tendencia subió 44% durante 2025 y la competencia por audiencias de posgrado es cada vez más intensa.</p><br><p class="note">Fuentes: WordStream Facebook Ads Benchmarks 2025 · Superads Education CPL Report 2025</p></div>
+</div>
+<!-- GOOGLE -->
+<div class="mix-panel" id="panel-bgoogle">
+<span class="panel-header-badge">Google Ads — Educación 2025</span>
+<div class="stats-grid" style="margin-top:12px">
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">$90.02</span><span class="stat-label">CPL Educación</span><span class="stat-sub">↑26% YoY ($71→$90)</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">$6.23</span><span class="stat-label">CPC Search</span><span class="stat-sub">Top 4 industrias más caras</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">11.38%</span><span class="stat-label">CVR Search</span><span class="stat-sub">Mayor subida YoY del sector</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem">8.33%</span><span class="stat-label">CTR Search</span><span class="stat-sub">↑ desde 7.91%</span></div>
+</div>
+<table class="budget-table" style="margin-top:12px">
+<thead><tr><th>Métrica</th><th>Educación 2025</th><th style="background:#888;color:#fff">Educación 2024</th><th>Variación YoY</th></tr></thead>
+<tbody>
+<tr style="background:var(--amarillo)"><td style="font-weight:700">CPL</td><td style="font-weight:700">$90.02</td><td style="font-weight:700">$71.52</td><td style="color:#EF5350;font-weight:700">+26%</td></tr>
+<tr><td>CPC</td><td>$6.23</td><td>$4.39</td><td style="color:#EF5350">+42%</td></tr>
+<tr><td>CVR</td><td>11.38%</td><td>7.91%</td><td style="color:#4CAF50">+44%</td></tr>
+<tr><td>CTR</td><td>8.33%</td><td>7.91%</td><td style="color:#4CAF50">+5%</td></tr>
+<tr><td>CPM Search</td><td>$17.80</td><td>$14.90</td><td style="color:#EF5350">+19%</td></tr>
+</tbody></table>
+<div class="claim-box" style="margin-top:12px"><p>El CPL de educación en Google creció <strong>26% YoY</strong>. El CPC de Education tuvo un spike de +42%, posicionándola entre las <strong>4 industrias más costosas</strong>. Instituciones con posicionamiento orgánico capturan clics branded a bajo costo.</p><br><p class="note">Fuentes: WordStream Google Ads Benchmarks 2025 · TheEDigital · Pixis 2025</p></div>
+</div>
+</div></div>
+</div></div></div>
+
+<!-- SB2: BENCH - COMPARATIVA + POSICIÓN CPA -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>POSICIÓN CPA</h2></div></div><div class="slide-desc-col"><p class="subtext">NUESTRO CPA ($110) VS BENCHMARK</p><p class="body-text">Análisis cruzado de plataformas con referencia al CPA actual de la operación.</p></div></div>
+<div class="content-area">
+<table class="budget-table">
+<thead><tr><th>Canal</th><th>CPC</th><th>CTR</th><th>CVR</th><th>CPL Benchmark</th><th style="background:var(--amarillo);color:var(--negro)">Nuestro CPA</th><th>Gap</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:700">Meta Lead Ads</td><td>$1.92</td><td>2.53%</td><td>13.58%</td><td style="font-weight:700">$19.27</td><td style="background:#FFF5D4;font-weight:700">$110</td><td style="color:#EF5350;font-weight:700">+471%</td></tr>
+<tr><td style="font-weight:700">Meta Traffic</td><td>$0.70</td><td>1.57%</td><td style="color:var(--gris-medio)">—</td><td style="color:var(--gris-medio)">Varía</td><td style="color:var(--gris-medio)">—</td><td style="color:var(--gris-medio)">—</td></tr>
+<tr><td style="font-weight:700">Google Search</td><td>$6.23</td><td>8.33%</td><td>11.38%</td><td style="font-weight:700">$90.02</td><td style="background:#FFF5D4;font-weight:700">$110</td><td style="color:#EF5350;font-weight:700">+22%</td></tr>
+<tr><td style="font-weight:700">Google Display</td><td>$1-$3</td><td>~0.5%</td><td>~1-2%</td><td style="color:var(--gris-medio)">$50-$120</td><td style="color:var(--gris-medio)">—</td><td style="color:var(--gris-medio)">—</td></tr>
+</tbody></table>
+<div class="two-col" style="margin-top:16px">
+<div class="stat-card" style="text-align:left;padding:16px 20px;border-left-color:#EF5350">
+<span class="stat-label">¿Por qué nuestro CPA es mayor?</span>
+<p class="light-text" style="font-size:.78rem;margin-top:6px">Los benchmarks incluyen marcas con fuerte posicionamiento orgánico y campañas branded con CPCs bajos. En posgrado, las instituciones con rankings capturan tráfico de alta intención a costos menores. <strong style="color:var(--negro)">Los actores en construcción de marca enfrentan CPAs 3-5x superiores.</strong></p>
+</div>
+<div class="stat-card" style="text-align:left;padding:16px 20px;border-left-color:#EF5350">
+<span class="stat-label">Factores que elevan el CPA</span>
+<p class="light-text" style="font-size:.78rem;margin-top:6px">• Decisión de alto valor, ciclo largo (3-6 meses)<br>• Audiencias profesionales limitadas y disputadas<br>• Competencia de instituciones con décadas de marca<br>• Keywords genéricos saturados (STEM MBA, analytics)</p>
+</div>
+</div>
+<div class="claim-box"><p>Un CPA de <strong>$110 está alineado con la realidad para operaciones en fase de construcción</strong>. El objetivo inmediato no es igualar el benchmark, sino <strong>optimizar progresivamente hacia $70-$100</strong>.</p></div>
+</div></div></div>
+
+<!-- SB3: BENCH - ESTACIONALIDAD + COMPETENCIA -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>ESTACIONALIDAD</h2></div></div><div class="slide-desc-col"><p class="subtext">CPL META ADS EDUCACIÓN 2025 + COMPETENCIA STEM MIAMI</p><p class="body-text">Q1 representa la ventana más eficiente; Q4 el pico de costos. El mercado lo dominan 4 instituciones.</p></div></div>
+<div class="content-area">
+<div class="two-col">
+<div>
+<h4 style="font-size:.85rem;margin-bottom:8px">CPL mensual Meta — Educación</h4>
+<div id="seasonBars" style="font-size:.78rem"></div>
+<div class="stats-grid col3" style="margin-top:12px">
+<div class="stat-card" style="border-left-color:#4CAF50"><span class="stat-val" style="font-size:1.6rem;color:#4CAF50">$14</span><span class="stat-label">Q1 (Ene-Mar)</span><span class="stat-sub">Mejor ventana · -42% vs pico</span></div>
+<div class="stat-card" style="border-left-color:#EF5350"><span class="stat-val" style="font-size:1.6rem;color:#EF5350">$24</span><span class="stat-label">Q4 (Oct)</span><span class="stat-sub">Pico máximo anual</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:1.6rem">+44%</span><span class="stat-label">Tendencia anual</span><span class="stat-sub">$15 Ene → $22 Dic</span></div>
+</div>
+</div>
+<div>
+<h4 style="font-size:.85rem;margin-bottom:8px">Competencia STEM Miami</h4>
+<table class="budget-table">
+<thead><tr><th>Institución</th><th>Formato</th><th>Ranking</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:700">U. of Miami — Herbert</td><td>Presencial/Híbrido</td><td style="font-weight:700">Top 50 · AACSB</td></tr>
+<tr><td style="font-weight:700">FIU — Chapman</td><td>Presencial/Online</td><td style="font-weight:700">Top 100 · AACSB</td></tr>
+<tr><td style="font-weight:700">Babson College</td><td>Blended Miami</td><td style="font-weight:700">#1 Entrep. · AACSB</td></tr>
+<tr><td style="font-weight:700">Kellogg — NW</td><td>EMBA Coral Gables</td><td style="font-weight:700">Top 10 Global · AACSB</td></tr>
+</tbody></table>
+<div class="claim-box" style="margin-top:12px"><p>Los 4 competidores tienen <strong>AACSB, rankings internacionales y décadas de inversión en marca</strong>. Capturan tráfico branded a CPCs bajos. Competir en keywords genéricos implica CPCs 3-5x más altos.</p></div>
+</div>
+</div>
+</div></div></div>
+
+<!-- SB4: BENCH - DIAGNÓSTICO + RECOMENDACIONES -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>DIAGNÓSTICO</h2></div></div><div class="slide-desc-col"><p class="subtext">OPORTUNIDADES Y DESAFÍOS + RECOMENDACIONES</p><p class="body-text">Factores que configuran el entorno publicitario y plan de acción basado en benchmarks.</p></div></div>
+<div class="content-area">
+<div class="two-col">
+<div>
+<div style="border-left:4px solid #EF5350;background:var(--gris-claro);border-radius:var(--radius);padding:14px 18px">
+<h4 style="font-size:.82rem;color:#EF5350;margin-bottom:8px">⚠ Desafíos del mercado</h4>
+<div style="font-size:.78rem;font-weight:300;color:var(--gris-oscuro);line-height:1.6">
+• CPL Google subió <strong>26% YoY</strong> ($71→$90)<br>
+• CPL Meta subió <strong>44%</strong> durante 2025 ($15→$22)<br>
+• Las 4 instituciones top capturan ~80% del tráfico branded<br>
+• Ciclo de decisión largo (3-6 meses) requiere nurturing obligatorio<br>
+• CPC Education es el <strong>4to más alto</strong> de Google ($6.23)<br>
+• Saturación de "STEM MBA" como keyword
+</div></div>
+</div>
+<div>
+<div style="border-left:4px solid #4CAF50;background:var(--gris-claro);border-radius:var(--radius);padding:14px 18px">
+<h4 style="font-size:.82rem;color:#4CAF50;margin-bottom:8px">✓ Oportunidades identificadas</h4>
+<div style="font-size:.78rem;font-weight:300;color:var(--gris-oscuro);line-height:1.6">
+• CVR Meta (13.58%) es el <strong>2do más alto</strong> de todas las industrias<br>
+• Q1 ofrece CPLs <strong>42% menores</strong> — ventana clave<br>
+• Meta Lead Ads mantiene CPL <strong>78% menor</strong> que Google ($19 vs $90)<br>
+• OPT 36 meses es gancho probado para audiencia LATAM<br>
+• CVR Google subió de 7.91% a <strong>11.38%</strong><br>
+• Audiencias nicho (analytics, data, fintech) subdisputadas
+</div></div>
+</div>
+</div>
+<h4 style="font-size:.85rem;margin:16px 0 8px">Recomendaciones basadas en benchmark</h4>
+<div class="stats-grid" style="margin-top:0">
+<div class="stat-card" style="text-align:left;padding:12px 16px"><span class="stat-label">1. Meta Lead Ads como canal principal</span><p class="light-text" style="font-size:.75rem;margin-top:3px">CPL 78% menor que Google. Formularios nativos con preguntas de cualificación. Advantage+ con lookalikes.</p></div>
+<div class="stat-card" style="text-align:left;padding:12px 16px"><span class="stat-label">2. 55-65% presupuesto en Q1</span><p class="light-text" style="font-size:.75rem;margin-top:3px">CPLs hasta 42% menores Ene-Mar. Invertir agresivamente para llenar pipeline de cohortes.</p></div>
+<div class="stat-card" style="text-align:left;padding:12px 16px"><span class="stat-label">3. Google solo high-intent</span><p class="light-text" style="font-size:.75rem;margin-top:3px">Long-tail: "business analytics master blended Miami", "MBA analytics OPT 36 months".</p></div>
+<div class="stat-card" style="text-align:left;padding:12px 16px"><span class="stat-label">4. Segmentación dual ES/EN</span><p class="light-text" style="font-size:.75rem;margin-top:3px">LATAM en español (OPT + Miami) y EE.UU. en inglés (career advancement + data skills).</p></div>
+</div>
+<div class="claim-box"><p><strong>KPIs objetivo:</strong> CPL Meta $15-25 · CPL Google $70-100 · Split 70/30 Meta/Google · Lead→Aplicación 8-12% con nurturing secuencial.</p></div>
+</div></div></div>
+
+<!-- S3: SECTION B2C -->
+<div class="slide slide-section"><div class="slide-inner"><h1>B2C — MBA ONLINE</h1><p class="section-sub">Campañas, medios, flow de inversión y diferenciación</p></div></div>
+
+<!-- S4: B2C CALENDARIO -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>B2C — CALENDARIO</h2></div></div><div class="slide-desc-col"><p class="subtext">3 CAMPAÑAS + 4 INFO SESSIONS</p><p class="body-text">Distribución estratégica con ventanas de maduración y soporte cruzado entre campañas.</p></div></div>
+<div class="content-area">
+<div class="timeline-container">
+<div class="timeline-item"><div class="timeline-header"><h3>01. Campaña General</h3><div class="timeline-tags"><span class="tl-tag highlight">21 Mar – 11 Jul</span><span class="tl-tag">Sostenimiento</span></div></div><p class="light-text">Activa todo el intake. Base permanente de captación y posicionamiento. Incluye Info Sessions 26 Mar y 28 May.</p></div>
+<div class="timeline-item"><div class="timeline-header"><h3>02. Campaña BCC Cala</h3><div class="timeline-tags"><span class="tl-tag highlight">4 May – 24 May</span><span class="tl-tag">Beca</span></div></div><p class="light-text">Mayo: mes de mayor interés de búsqueda y pico de captación. Abril como mes de consideración con save the date. Info Session 29 Abr.</p></div>
+<div class="timeline-item"><div class="timeline-header"><h3>03. Global Ambassadors Scholarship</h3><div class="timeline-tags"><span class="tl-tag highlight">1 Jun – 30 Jun</span><span class="tl-tag">Cierre</span></div></div><p class="light-text">Campaña de cierre con urgencia. Compensa agotamiento del insumo B2B. Info Session 24 Jun.</p></div>
+</div>
+<div class="claim-box"><p><strong>Recomendación:</strong> BCC Cala en mayo se alinea con el comportamiento de búsqueda. Abril funciona como posicionamiento previo.</p></div>
+</div></div></div>
+
+<!-- S5: B2C MIX MEDIOS -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>B2C — MIX DE MEDIOS</h2></div></div><div class="slide-desc-col"><p class="subtext">LINKEDIN + META · DOS ESCENARIOS</p><p class="body-text">100% del crecimiento en LinkedIn, priorizando México y Perú por CPL más eficiente.</p></div></div>
+<div class="content-area">
+
+<div class="mix-interactive">
+<div class="mix-tabs">
+<button class="mix-tab active" onclick="showMix2('mix13k',this)"><span>Escenario $13.6K</span><span class="pct">752 leads</span></button>
+<button class="mix-tab" onclick="showMix2('mix18k',this)"><span>Escenario $18K</span><span class="pct">995 leads</span></button>
+</div>
+<div class="mix-panel-container" style="padding:16px">
+
+<!-- $13.6K -->
+<div class="mix-panel active" id="panel-mix13k">
+<div class="stats-grid">
+<div class="stat-card"><span class="stat-val" style="color:var(--amarillo);font-size:2.2rem">$13.6K</span><span class="stat-label">Presupuesto Total</span><span class="stat-sub">+81% vs plan Summer 26 ($7,500)</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2.2rem">752</span><span class="stat-label">Leads proyectados</span><span class="stat-sub">4 mercados</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2.2rem">15</span><span class="stat-label">Matrículas meta</span><span class="stat-sub">Tasa conv. 2%</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2.2rem">$17</span><span class="stat-label">CPL LinkedIn prom.</span><span class="stat-sub">$10–$35 según mercado</span></div>
+</div>
+<div style="display:flex;gap:14px;margin-top:14px">
+<div style="flex:1;background:var(--negro);border-radius:var(--radius);padding:14px 18px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="color:var(--blanco);font-weight:700;font-size:.9rem">LinkedIn</span><span style="color:var(--amarillo);font-weight:700;font-size:1.1rem">91%</span></div>
+<div style="height:8px;background:#333;border-radius:4px;overflow:hidden"><div style="width:91%;height:100%;background:var(--amarillo);border-radius:4px"></div></div>
+<div style="display:flex;justify-content:space-between;margin-top:8px"><span style="color:var(--gris-medio);font-size:.75rem">$12,425</span><span style="color:var(--gris-medio);font-size:.75rem">718 leads</span></div>
+<p style="color:var(--blanco);font-weight:300;font-size:.78rem;margin-top:10px;line-height:1.5">Canal de volumen y perfil. Lead más alineado con MBA. Lead Gen Forms, Sponsored Content, Conversation Ads, InMail, Video Ads.</p>
+<p style="color:var(--amarillo);font-weight:600;font-size:.75rem;margin-top:8px">Prioridad: México ($20 CPL) · Perú ($10-$20) · USA ($35)</p>
+</div>
+<div style="flex:1;background:var(--gris-claro);border-radius:var(--radius);padding:14px 18px;border:1px solid var(--gris-borde)">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="color:var(--negro);font-weight:700;font-size:.9rem">Meta</span><span style="color:var(--negro);font-weight:700;font-size:1.1rem">9%</span></div>
+<div style="height:8px;background:var(--gris-borde);border-radius:4px;overflow:hidden"><div style="width:9%;height:100%;background:var(--negro);border-radius:4px"></div></div>
+<div style="display:flex;justify-content:space-between;margin-top:8px"><span style="color:var(--gris-medio);font-size:.75rem">$1,175</span><span style="color:var(--gris-medio);font-size:.75rem">34 leads</span></div>
+<p style="color:var(--gris-oscuro);font-weight:300;font-size:.78rem;margin-top:10px;line-height:1.5">Soporte para eventos, Info Sessions y remarketing. Event Ads, Lead Ads, Landing de conversión ($65 CPL).</p>
+</div>
+</div>
+</div>
+
+<!-- $18K -->
+<div class="mix-panel" id="panel-mix18k">
+<div class="stats-grid">
+<div class="stat-card"><span class="stat-val" style="color:var(--amarillo);font-size:2.2rem">$18K</span><span class="stat-label">Presupuesto Total</span><span class="stat-sub">+140% vs plan Summer 26 ($7,500)</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2.2rem">995</span><span class="stat-label">Leads proyectados</span><span class="stat-sub">4 mercados</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2.2rem">20</span><span class="stat-label">Matrículas meta</span><span class="stat-sub">Tasa conv. 2%</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2.2rem">$17</span><span class="stat-label">CPL LinkedIn prom.</span><span class="stat-sub">$10–$35 según mercado</span></div>
+</div>
+<div style="display:flex;gap:14px;margin-top:14px">
+<div style="flex:1;background:var(--negro);border-radius:var(--radius);padding:14px 18px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="color:var(--blanco);font-weight:700;font-size:.9rem">LinkedIn</span><span style="color:var(--amarillo);font-weight:700;font-size:1.1rem">91%</span></div>
+<div style="height:8px;background:#333;border-radius:4px;overflow:hidden"><div style="width:91%;height:100%;background:var(--amarillo);border-radius:4px"></div></div>
+<div style="display:flex;justify-content:space-between;margin-top:8px"><span style="color:var(--gris-medio);font-size:.75rem">$16,440</span><span style="color:var(--gris-medio);font-size:.75rem">950 leads</span></div>
+<p style="color:var(--blanco);font-weight:300;font-size:.78rem;margin-top:10px;line-height:1.5">Misma estrategia de canal, escala proporcional. El incremento permite mayor frecuencia y cobertura en los 3 mercados clave.</p>
+<p style="color:var(--amarillo);font-weight:600;font-size:.75rem;margin-top:8px">Prioridad: México ($20 CPL) · Perú ($10-$20) · USA ($35)</p>
+</div>
+<div style="flex:1;background:var(--gris-claro);border-radius:var(--radius);padding:14px 18px;border:1px solid var(--gris-borde)">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="color:var(--negro);font-weight:700;font-size:.9rem">Meta</span><span style="color:var(--negro);font-weight:700;font-size:1.1rem">9%</span></div>
+<div style="height:8px;background:var(--gris-borde);border-radius:4px;overflow:hidden"><div style="width:9%;height:100%;background:var(--negro);border-radius:4px"></div></div>
+<div style="display:flex;justify-content:space-between;margin-top:8px"><span style="color:var(--gris-medio);font-size:.75rem">$1,560</span><span style="color:var(--gris-medio);font-size:.75rem">45 leads</span></div>
+<p style="color:var(--gris-oscuro);font-weight:300;font-size:.78rem;margin-top:10px;line-height:1.5">Soporte para eventos, Info Sessions y remarketing. Misma distribución proporcional.</p>
+</div>
+</div>
+<div class="claim-box" style="margin-top:14px"><p><strong style="color:#4CAF50">+32% leads vs escenario $13.6K</strong> con la misma distribución y CPLs. El incremento va 100% a LinkedIn para maximizar perfil de lead.</p></div>
+</div>
+
+</div></div>
+</div></div></div>
+
+<!-- S6: B2C FLOW -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>B2C — FLOW</h2></div></div><div class="slide-desc-col"><p class="subtext">DISTRIBUCIÓN DE INVERSIÓN</p><p class="body-text">Dos escenarios de presupuesto con la misma distribución proporcional y CPLs.</p></div></div>
+<div class="content-area">
+
+<div class="mix-interactive">
+<div class="mix-tabs">
+<button class="mix-tab active" onclick="showFlow('f13k',this)"><span>Escenario $13.6K</span><span class="pct">752 leads</span></button>
+<button class="mix-tab" onclick="showFlow('f18k',this)"><span>Escenario $18K</span><span class="pct">995 leads</span></button>
+</div>
+<div class="mix-panel-container" style="padding:16px">
+
+<!-- $13.6K -->
+<div class="mix-panel active" id="panel-f13k">
+<span class="panel-header-badge">$13,600 USD → 752 leads → 15 matrículas</span>
+<h4 style="font-size:.8rem;margin:10px 0 4px">Campaña General (Pauta)</h4>
+<table class="budget-table">
+<thead><tr><th>Origen</th><th>Medio</th><th>País</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th></tr></thead>
+<tbody>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>United States</td><td>$1,100</td><td>$35</td><td>31</td><td>0.63</td></tr>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>México</td><td>$1,700</td><td>$20</td><td>85</td><td>1.70</td></tr>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>Perú</td><td>$1,350</td><td>$20</td><td>68</td><td>1.35</td></tr>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>Todos</td><td>$750</td><td>$20</td><td>38</td><td>0.75</td></tr>
+<tr><td>Landing Pauta</td><td>META</td><td>Todos</td><td>$550</td><td>$65</td><td>8</td><td>0.17</td></tr>
+<tr><td>InfoSessions</td><td>LINKEDIN</td><td>Todos</td><td>$150</td><td>$5</td><td>30</td><td>0.60</td></tr>
+<tr><td>InfoSessions</td><td>META</td><td>Todos</td><td>$75</td><td>$25</td><td>3</td><td>0.06</td></tr>
+</tbody>
+<tfoot><tr><td colspan="3">SUBTOTAL PAUTA</td><td>$5,675</td><td></td><td>263</td><td>5.26</td></tr></tfoot>
+</table>
+<h4 style="font-size:.8rem;margin:12px 0 4px">BCC Cala + Global Ambassadors (Becas)</h4>
+<table class="budget-table">
+<thead><tr><th>Origen</th><th>Medio</th><th>País</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th></tr></thead>
+<tbody>
+<tr><td>BCC Cala</td><td>LINKEDIN</td><td>United States</td><td>$825</td><td>$25</td><td>33</td><td>0.66</td></tr>
+<tr><td>BCC Cala</td><td>LINKEDIN</td><td>México</td><td>$1,875</td><td>$20</td><td>94</td><td>1.88</td></tr>
+<tr><td>BCC Cala</td><td>LINKEDIN</td><td>Perú</td><td>$1,375</td><td>$10</td><td>138</td><td>2.75</td></tr>
+<tr><td>BCC Cala</td><td>META</td><td>Todos</td><td>$550</td><td>$25</td><td>22</td><td>0.44</td></tr>
+<tr><td>Global Amb.</td><td>LINKEDIN</td><td>United States</td><td>$750</td><td>$25</td><td>30</td><td>0.60</td></tr>
+<tr><td>Global Amb.</td><td>LINKEDIN</td><td>México</td><td>$1,650</td><td>$20</td><td>83</td><td>1.65</td></tr>
+<tr><td>Global Amb.</td><td>LINKEDIN</td><td>Perú</td><td>$900</td><td>$10</td><td>90</td><td>1.80</td></tr>
+</tbody>
+<tfoot><tr><td colspan="3">SUBTOTAL BCC</td><td>$7,925</td><td></td><td>489</td><td>9.78</td></tr></tfoot>
+</table>
+<div class="claim-box"><p><strong>Total: $13,600 → 752 leads → 15 matrículas.</strong> LinkedIn $12,425 (91%) · CPL prom. $17. Meta $1,175 (9%) soporte. <strong style="color:#EF5350">+81% vs plan Summer 26 ($7,500).</strong></p></div>
+</div>
+
+<!-- $18K -->
+<div class="mix-panel" id="panel-f18k">
+<span class="panel-header-badge">$18,000 USD → 995 leads → 20 matrículas</span>
+<h4 style="font-size:.8rem;margin:10px 0 4px">Campaña General (Pauta)</h4>
+<table class="budget-table">
+<thead><tr><th>Origen</th><th>Medio</th><th>País</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th></tr></thead>
+<tbody>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>United States</td><td>$1,455</td><td>$35</td><td>42</td><td>0.83</td></tr>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>México</td><td>$2,250</td><td>$20</td><td>113</td><td>2.25</td></tr>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>Perú</td><td>$1,790</td><td>$20</td><td>90</td><td>1.79</td></tr>
+<tr><td>Pauta LinkedIn</td><td>LINKEDIN</td><td>Todos</td><td>$990</td><td>$20</td><td>50</td><td>0.99</td></tr>
+<tr><td>Landing Pauta</td><td>META</td><td>Todos</td><td>$730</td><td>$65</td><td>11</td><td>0.22</td></tr>
+<tr><td>InfoSessions</td><td>LINKEDIN</td><td>Todos</td><td>$200</td><td>$5</td><td>40</td><td>0.80</td></tr>
+<tr><td>InfoSessions</td><td>META</td><td>Todos</td><td>$100</td><td>$25</td><td>4</td><td>0.08</td></tr>
+</tbody>
+<tfoot><tr><td colspan="3">SUBTOTAL PAUTA</td><td>$7,515</td><td></td><td>349</td><td>6.97</td></tr></tfoot>
+</table>
+<h4 style="font-size:.8rem;margin:12px 0 4px">BCC Cala + Global Ambassadors (Becas)</h4>
+<table class="budget-table">
+<thead><tr><th>Origen</th><th>Medio</th><th>País</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th></tr></thead>
+<tbody>
+<tr><td>BCC Cala</td><td>LINKEDIN</td><td>United States</td><td>$1,090</td><td>$25</td><td>44</td><td>0.87</td></tr>
+<tr><td>BCC Cala</td><td>LINKEDIN</td><td>México</td><td>$2,480</td><td>$20</td><td>124</td><td>2.48</td></tr>
+<tr><td>BCC Cala</td><td>LINKEDIN</td><td>Perú</td><td>$1,820</td><td>$10</td><td>182</td><td>3.64</td></tr>
+<tr><td>BCC Cala</td><td>META</td><td>Todos</td><td>$730</td><td>$25</td><td>29</td><td>0.58</td></tr>
+<tr><td>Global Amb.</td><td>LINKEDIN</td><td>United States</td><td>$990</td><td>$25</td><td>40</td><td>0.79</td></tr>
+<tr><td>Global Amb.</td><td>LINKEDIN</td><td>México</td><td>$2,185</td><td>$20</td><td>109</td><td>2.19</td></tr>
+<tr><td>Global Amb.</td><td>LINKEDIN</td><td>Perú</td><td>$1,190</td><td>$10</td><td>119</td><td>2.38</td></tr>
+</tbody>
+<tfoot><tr><td colspan="3">SUBTOTAL BCC</td><td>$10,485</td><td></td><td>647</td><td>12.93</td></tr></tfoot>
+</table>
+<div class="claim-box"><p><strong>Total: $18,000 → 995 leads → 20 matrículas.</strong> LinkedIn $16,450 (91%) · CPL prom. $17. Meta $1,560 (9%) soporte. <strong style="color:#4CAF50">+32% leads vs escenario $13.6K, misma distribución.</strong></p></div>
+</div>
+
+</div></div>
+</div></div></div>
+
+<!-- S7: B2C DIFERENCIACIÓN -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>B2C — DIFERENCIACIÓN</h2></div></div><div class="slide-desc-col"><p class="subtext">VS SPRING 2026</p><p class="body-text">Variación, valor agregado, eventos especiales y beneficios.</p></div></div>
+<div class="content-area">
+<div class="journey-container">
+<div class="acc-item open"><div class="acc-header" onclick="toggleAcc(this)"><span>1. Variación de comunicaciones</span><span class="acc-icon">−</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr">
+<div class="j-box"><h5>SPRING</h5><p>Mensajes institucionales genéricos, misma línea gráfica, sin estacionalidad.</p></div>
+<div class="j-box highlight"><h5>SUMMER</h5><p>Narrativa de temporada, testimoniales frescos, urgencia por cierre, copy diferenciado por campaña.</p></div>
+</div></div></div>
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>2. Valor agregado en las 3 campañas</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr 1fr">
+<div class="j-box"><h5>GENERAL</h5><p>Flexibilidad, casos de éxito, ROI del MBA.</p></div>
+<div class="j-box"><h5>BCC CALA</h5><p>Beca como puerta de acceso, postulación simplificada, deadline.</p></div>
+<div class="j-box"><h5>GLOBAL AMB.</h5><p>Exclusividad, red global, beneficio económico + internacional.</p></div>
+</div></div></div>
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>3. Eventos especiales (no Info Sessions)</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr">
+<div class="j-box"><h5>PROPUESTAS</h5><p>Webinars con alumni, paneles de industria, Q&A live con directores, masterclasses abiertas.</p></div>
+<div class="j-box"><h5>NOTA</h5><p>Info Sessions son transversales al MBA Online, independientes de campañas. Se ejecutan siempre.</p></div>
+</div></div></div>
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>4. Beneficios destacados</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid">
+<div class="j-box"><h5>BECAS</h5><p>BCC Cala + Global Ambassadors.</p></div>
+<div class="j-box"><h5>FINANCIACIÓN</h5><p>Planes de pago flexibles.</p></div>
+<div class="j-box"><h5>NETWORKING</h5><p>Comunidad global.</p></div>
+<div class="j-box"><h5>ACREDITACIÓN</h5><p>Diferencial vs competencia.</p></div>
+</div></div></div>
+</div></div>
+</div></div>
+
+<!-- S8: SECTION STEM -->
+<div class="slide slide-section"><div class="slide-inner"><h1>STEM</h1><p class="section-sub">Presupuesto, calendario, flow, benchmark e Info Sessions</p></div></div>
+
+<!-- S9: STEM CALENDARIO -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>STEM — CALENDARIO</h2></div></div><div class="slide-desc-col"><p class="subtext">16 MARZO – 12 JULIO 2026</p><p class="body-text">$12,000 USD con 7 Info Sessions para mantener flujo constante.</p></div></div>
+<div class="content-area">
+<div class="stats-grid col3">
+<div class="stat-card"><span class="stat-val" style="color:var(--amarillo)">$12K</span><span class="stat-label">Presupuesto USD</span><span class="stat-sub">16 Mar – 12 Jul</span></div>
+<div class="stat-card"><span class="stat-val">7</span><span class="stat-label">Info Sessions</span><span class="stat-sub">Frecuencia quincenal</span></div>
+<div class="stat-card"><span class="stat-val">~17</span><span class="stat-label">Semanas activas</span><span class="stat-sub">Continuidad desde Spring</span></div>
+</div>
+<table class="budget-table" style="margin-top:18px">
+<thead><tr><th>Fecha</th><th>Semana</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>26 marzo</td><td>Sem 1</td><td>Ya confirmada</td></tr>
+<tr><td>9 abril</td><td>Sem 3</td><td>—</td></tr>
+<tr><td>16 abril</td><td>Sem 4</td><td>—</td></tr>
+<tr><td>7 mayo</td><td>Sem 7</td><td>—</td></tr>
+<tr><td>21 mayo</td><td>Sem 9</td><td>—</td></tr>
+<tr><td>4 junio</td><td>Sem 11</td><td>—</td></tr>
+<tr><td>18 junio</td><td>Sem 13</td><td>—</td></tr>
+</tbody></table>
+<div class="claim-box"><p>Los <strong>$12,000 de Spring se consumieron del 20 Oct 2025 al 15 Mar 2026</strong>. Desde el 16 de marzo se inicia el nuevo presupuesto.</p></div>
+</div></div></div>
+
+<!-- S10: STEM FLOW -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>STEM — FLOW</h2></div></div><div class="slide-desc-col"><p class="subtext">DISTRIBUCIÓN DE INVERSIÓN</p><p class="body-text">Desglose por subcanal, medio con leads y cierres esperados. Mercado: United States.</p></div></div>
+<div class="content-area">
+<table class="budget-table">
+<thead><tr><th>Origen</th><th>Medio</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th><th>Conv. %</th></tr></thead>
+<tbody>
+<tr><td>Programas STEM - Pauta Meta</td><td>META</td><td>$1,500</td><td>$90</td><td>17</td><td>0.50</td><td>3.0%</td></tr>
+<tr><td>Info Sessions</td><td>LINKEDIN</td><td>$600</td><td>$25</td><td>24</td><td>0.12</td><td>0.5%</td></tr>
+<tr><td>Info Sessions</td><td>META</td><td>$350</td><td>$40</td><td>9</td><td>0.04</td><td>0.5%</td></tr>
+<tr><td>Miami: Leading with Intelligence</td><td>LINKEDIN</td><td>$1,250</td><td>$40</td><td>31</td><td>0.16</td><td>0.5%</td></tr>
+<tr><td>Miami: Leading with Intelligence</td><td>META</td><td>$500</td><td>$40</td><td>13</td><td>0.06</td><td>0.5%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>GOOGLE</td><td>$2,500</td><td>$150</td><td>17</td><td>0.50</td><td>3.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>LINKEDIN</td><td>$3,750</td><td>$100</td><td>38</td><td>1.13</td><td>3.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>META</td><td>$1,550</td><td>$80</td><td>19</td><td>—</td><td>—</td></tr>
+</tbody>
+<tfoot><tr><td colspan="2">TOTAL STEM</td><td>$12,000</td><td></td><td>167</td><td>2.51</td><td></td></tr></tfoot>
+</table>
+
+<div class="stats-grid col3" style="margin-top:18px">
+<div class="stat-card"><span class="stat-val">$5,600</span><span class="stat-label">LinkedIn (47%)</span><span class="stat-sub">93 leads · CPL $60</span></div>
+<div class="stat-card"><span class="stat-val">$3,900</span><span class="stat-label">Meta (32%)</span><span class="stat-sub">57 leads · CPL $68</span></div>
+<div class="stat-card"><span class="stat-val">$2,500</span><span class="stat-label">Google (21%)</span><span class="stat-sub">17 leads · CPL $150</span></div>
+</div>
+
+<div class="claim-box"><p><strong>Sunshine Scholarships concentra 65% del presupuesto ($7,800)</strong> con el mix más diverso (Google + LinkedIn + Meta). Info Sessions y Miami operan como captación de eventos.</p></div>
+</div></div></div>
+
+<!-- S11: STEM VOLUMEN -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>STEM — VOLUMEN</h2></div></div><div class="slide-desc-col"><p class="subtext">PLAN DE TRABAJO</p><p class="body-text">Mantener calidad pero mejorar volumen: optimización, presupuesto y experimentación.</p></div></div>
+<div class="content-area">
+<div class="journey-container">
+<div class="acc-item open"><div class="acc-header" onclick="toggleAcc(this)"><span>Diagnóstico</span><span class="acc-icon">−</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr">
+<div class="j-box"><h5>DOLOR</h5><p>Volumen insuficiente vs capacidad operativa. No se consumió todo el presupuesto.</p></div>
+<div class="j-box"><h5>CONTEXTO</h5><p>Mejora en perfilación pero CPL subió y volumen bajó. Se necesita equilibrio.</p></div>
+</div></div></div>
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>Plan de acción STEM</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid">
+<div class="j-box"><h5>OPTIMIZACIÓN</h5><p>Redistribuir presupuesto hacia formatos de mayor volumen sin perder perfil.</p></div>
+<div class="j-box"><h5>EXPERIMENTACIÓN</h5><p>Acciones quincenales: nuevos formatos, bench, canales alternativos.</p></div>
+<div class="j-box"><h5>REMARKETING</h5><p>Flujos automatización + IA para reactivar leads que históricamente convierten.</p></div>
+<div class="j-box highlight"><h5>ENFOQUE</h5><p>Posicionamiento + Conversión + Nurturing + IA</p></div>
+</div></div></div>
+</div></div>
+</div></div>
+
+<!-- S13: SECTION TRANSVERSALES -->
+<div class="slide slide-section"><div class="slide-inner"><h1>TRANSVERSALES</h1><p class="section-sub">Comunicación, reactivación, experimentación y próximos pasos</p></div></div>
+
+<!-- SC1: COMUNICACIÓN - ÁNGULOS DE PAUTA -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>ÁNGULOS DE VENTA</h2></div></div><div class="slide-desc-col"><p class="subtext">CRITERIO ESTRATÉGICO + 6 ÁNGULOS</p><p class="body-text">Territorios de mensaje para ordenar contenido, clasificar piezas y medir desempeño por narrativa.</p></div></div>
+<div class="content-area">
+<div class="claim-box" style="margin-top:0;margin-bottom:14px"><p><strong>Enfoque de comunicación:</strong> la narrativa se centra en <strong>valor profesional, proyección internacional, diferencial competitivo y credibilidad institucional</strong>. MBA debe sentirse aspiracional y directivo. STEM debe sentirse competitivo, técnico-estratégico y conectado con el futuro del trabajo.</p></div>
+
+<div class="journey-container">
+<div class="acc-item open"><div class="acc-header" onclick="toggleAcc(this)"><span><span style="font-size:.65rem;font-weight:700;background:#eaf1fb;color:#0f3d75;padding:2px 7px;border-radius:50px;margin-right:6px">MBA</span> 1. Ascenso profesional y reposicionamiento</span><span class="acc-icon">−</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<div class="j-box"><h5>PROMESA</h5><p>Pasar de ejecutar a liderar.</p></div>
+<div class="j-box"><h5>TENSIÓN QUE RESUELVE</h5><p>Sentirse listo para más, pero sin plataforma para dar el salto.</p></div>
+<div class="j-box"><h5>APLICA A</h5><p>MBA Online (prioritario).</p></div>
+<div class="j-box highlight"><h5>MENSAJES</h5><p style="font-size:.85rem">"Tu siguiente cargo no se improvisa" · "Liderar mejor también se estudia"</p></div>
+</div></div></div>
+
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span><span style="font-size:.65rem;font-weight:700;background:#f3f4f6;color:#374151;padding:2px 7px;border-radius:50px;margin-right:6px">AMBAS</span> 2. Liderazgo global y proyección internacional</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<div class="j-box"><h5>PROMESA</h5><p>Formación alineada con contextos globales y decisiones de mayor alcance.</p></div>
+<div class="j-box"><h5>TENSIÓN QUE RESUELVE</h5><p>Perfiles que quieren crecer pero no quedarse con mirada limitada o local.</p></div>
+<div class="j-box"><h5>APLICA A</h5><p>MBA Online y STEM.</p></div>
+<div class="j-box highlight"><h5>MENSAJES</h5><p style="font-size:.85rem">"Prepárate para liderar con visión global" · "No estudies aislado del mundo real"</p></div>
+</div></div></div>
+
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span><span style="font-size:.65rem;font-weight:700;background:#e8f6f2;color:#0b6b57;padding:2px 7px;border-radius:50px;margin-right:6px">STEM</span> 3. Dominio de datos, tecnología y decisiones</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<div class="j-box"><h5>PROMESA</h5><p>Pasar de reaccionar al cambio a poder dirigirlo.</p></div>
+<div class="j-box"><h5>TENSIÓN QUE RESUELVE</h5><p>Quedarse atrás frente a perfiles más analíticos, híbridos y actualizados.</p></div>
+<div class="j-box"><h5>APLICA A</h5><p>Programas STEM (prioritario).</p></div>
+<div class="j-box highlight"><h5>MENSAJES</h5><p style="font-size:.85rem">"Convierte datos en decisiones" · "Hazte más relevante en un mercado guiado por analítica"</p></div>
+</div></div></div>
+
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span><span style="font-size:.65rem;font-weight:700;background:#e8f6f2;color:#0b6b57;padding:2px 7px;border-radius:50px;margin-right:6px">STEM</span> 4. Perfil híbrido y competitividad futura</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<div class="j-box"><h5>PROMESA</h5><p>Convertirte en un profesional más difícil de reemplazar.</p></div>
+<div class="j-box"><h5>TENSIÓN QUE RESUELVE</h5><p>Sentir que el mercado evoluciona más rápido que el propio perfil.</p></div>
+<div class="j-box"><h5>APLICA A</h5><p>Programas STEM (prioritario).</p></div>
+<div class="j-box highlight"><h5>MENSAJES</h5><p style="font-size:.85rem">"Tu carrera necesita más que experiencia" · "El futuro premia negocio + tecnología"</p></div>
+</div></div></div>
+
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span><span style="font-size:.65rem;font-weight:700;background:#f3f4f6;color:#374151;padding:2px 7px;border-radius:50px;margin-right:6px">AMBAS</span> 5. Credibilidad, respaldo y prueba social</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<div class="j-box"><h5>PROMESA</h5><p>Elegir una institución que genere confianza, no solo interés.</p></div>
+<div class="j-box"><h5>TENSIÓN QUE RESUELVE</h5><p>Duda natural ante la inversión de tiempo, dinero y prestigio profesional.</p></div>
+<div class="j-box"><h5>APLICA A</h5><p>MBA y STEM (retargeting y fondo de embudo).</p></div>
+<div class="j-box highlight"><h5>MENSAJES</h5><p style="font-size:.85rem">"Cuando la decisión importa, la confianza pesa"</p></div>
+</div></div></div>
+
+<div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span><span style="font-size:.65rem;font-weight:700;background:#e8f6f2;color:#0b6b57;padding:2px 7px;border-radius:50px;margin-right:6px">STEM / MBA soporte</span> 6. Oportunidad de acceso y momento</span><span class="acc-icon">+</span></div>
+<div class="acc-content"><div class="j-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<div class="j-box"><h5>PROMESA</h5><p>El momento correcto para empezar existe y puede estar ahora.</p></div>
+<div class="j-box"><h5>TENSIÓN QUE RESUELVE</h5><p>La postergación y la sensación de que "más adelante" siempre será mejor.</p></div>
+<div class="j-box"><h5>APLICA A</h5><p>STEM (principal) y MBA (soporte táctico).</p></div>
+<div class="j-box highlight"><h5>MENSAJES</h5><p style="font-size:.85rem">"Tal vez no necesitas más tiempo, sino un mejor momento"</p></div>
+</div></div></div>
+</div>
+</div></div></div>
+
+<!-- SC2: COMUNICACIÓN - APLICACIÓN POR MEDIO + LÍNEA (tabs) -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>APLICACIÓN</h2></div></div><div class="slide-desc-col"><p class="subtext">ÁNGULOS POR LÍNEA Y POR MEDIO</p><p class="body-text">Cómo se despliegan los 6 ángulos según la línea de negocio y el canal publicitario.</p></div></div>
+<div class="content-area">
+<div class="mix-interactive">
+<div class="mix-tabs">
+<button class="mix-tab active" onclick="showComm('clinea',this)"><span>Por línea</span><span class="pct">MBA vs STEM</span></button>
+<button class="mix-tab" onclick="showComm('cmedio',this)"><span>Por medio</span><span class="pct">4 canales</span></button>
+<button class="mix-tab" onclick="showComm('clectura',this)"><span>Lectura por eje</span><span class="pct">6 × 2</span></button>
+</div>
+<div class="mix-panel-container">
+<!-- POR LÍNEA -->
+<div class="mix-panel active" id="panel-clinea">
+<span class="panel-header-badge">Prioridad por línea de negocio</span>
+<table class="budget-table" style="margin-top:12px">
+<thead><tr><th>Línea</th><th>Ángulos core</th><th>Ángulos soporte</th><th>Lectura estratégica</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:700">MBA Online</td><td>Ascenso profesional, liderazgo global, credibilidad</td><td>Oportunidad de acceso, testimonios</td><td style="font-size:.75rem">Comunicación ejecutiva, aspiracional, orientada a crecimiento profesional.</td></tr>
+<tr><td style="font-weight:700">Programas STEM</td><td>Datos/tech, perfil híbrido, liderazgo global, credibilidad</td><td>Oportunidad de acceso / beca</td><td style="font-size:.75rem">Reforzar actualización, competitividad futura, valor del perfil técnico-estratégico.</td></tr>
+</tbody></table>
+</div>
+<!-- POR MEDIO -->
+<div class="mix-panel" id="panel-cmedio">
+<span class="panel-header-badge">Aplicación por medio</span>
+<table class="budget-table" style="margin-top:12px">
+<thead><tr><th>Medio</th><th>Rol</th><th>Ángulos que mejor funcionan</th><th>Ejemplo de aplicación</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:700">Meta Conversiones</td><td style="font-size:.75rem">Descubrir qué narrativa mueve más intención y conversión</td><td>Ascenso, perfil híbrido, oportunidad, credibilidad</td><td style="font-size:.75rem">Campañas por narrativa: "MBA | ascenso", "STEM | data"</td></tr>
+<tr><td style="font-weight:700">LinkedIn InMail</td><td style="font-size:.75rem">Consideración con tono consultivo y relevancia profesional</td><td>Ascenso profesional, liderazgo global, datos</td><td style="font-size:.75rem">Mensajes desde el momento profesional del usuario</td></tr>
+<tr><td style="font-weight:700">Google Demand Gen</td><td style="font-size:.75rem">Visual para empujar interés y consideración</td><td>Liderazgo global, credibilidad, aspiracional, beca</td><td style="font-size:.75rem">Videos cortos o carruseles de prestigio e historia visual</td></tr>
+<tr><td style="font-weight:700">Performance Max</td><td style="font-size:.75rem">Captura demanda latente con assets organizados por tema</td><td>Todos, agrupados por línea y eje</td><td style="font-size:.75rem">Asset groups: MBA ascenso, MBA global, STEM data, STEM beca</td></tr>
+</tbody></table>
+</div>
+<!-- LECTURA POR EJE -->
+<div class="mix-panel" id="panel-clectura">
+<span class="panel-header-badge">Lectura por eje y vertical</span>
+<table class="budget-table" style="margin-top:12px">
+<thead><tr><th>Eje</th><th>MBA Online</th><th>Programas STEM</th><th>Tono</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:700">Ascenso profesional</td><td>Muy alto potencial. Principal.</td><td>Sí, aterrizado a evolución técnico-estratégica.</td><td>Aspiracional, ejecutivo, concreto.</td></tr>
+<tr><td style="font-weight:700">Liderazgo global</td><td>Muy relevante por prestigio.</td><td>Muy relevante por experiencia internacional.</td><td>Premium, amplio, ambicioso.</td></tr>
+<tr><td style="font-weight:700">Datos y tecnología</td><td>Solo si se moderniza la narrativa MBA.</td><td>Uno de los más fuertes y naturales.</td><td>Racional, actualizado, competitivo.</td></tr>
+<tr><td style="font-weight:700">Perfil híbrido</td><td>Soporte en perfiles ejecutivos modernos.</td><td style="font-weight:700;color:var(--negro)">Core absoluto.</td><td>Futuro del trabajo, valor profesional.</td></tr>
+<tr><td style="font-weight:700">Credibilidad</td><td>Muy importante en retargeting.</td><td>Reduce barreras de decisión.</td><td>Seguro, serio, confiable.</td></tr>
+<tr><td style="font-weight:700">Oportunidad / beca</td><td>Refuerzo táctico.</td><td>Motor de acción.</td><td>Directo, claro, oportuno.</td></tr>
+</tbody></table>
+</div>
+</div></div>
+</div></div></div>
+
+<!-- SC3: COMUNICACIÓN - MÉTODO DE PRUEBAS -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>TESTING CREATIVO</h2></div></div><div class="slide-desc-col"><p class="subtext">MÉTODO DE PRUEBAS EN 4 FASES</p><p class="body-text">Sistema escalonado para validar ángulos, mensajes, formatos y escalar ganadores.</p></div></div>
+<div class="content-area">
+<div class="stats-grid">
+<div class="stat-card"><span class="stat-val" style="font-size:2rem;color:var(--amarillo)">F1</span><span class="stat-label">Validar ángulo</span><span class="stat-sub">4-6 ejes por vertical con lectura homogénea de resultados</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem;color:var(--amarillo)">F2</span><span class="stat-label">Validar mensaje</span><span class="stat-sub">3 contenidos/eje: aspiracional, racional, prueba social</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem;color:var(--amarillo)">F3</span><span class="stat-label">Validar formato</span><span class="stat-sub">Estático vs video vs carrusel sobre ejes ganadores</span></div>
+<div class="stat-card"><span class="stat-val" style="font-size:2rem;color:var(--amarillo)">F4</span><span class="stat-label">Escalar y redistribuir</span><span class="stat-sub">Consolidar presupuesto hacia ángulos con mejor CPL y calidad</span></div>
+</div>
+
+<table class="budget-table" style="margin-top:16px">
+<thead><tr><th>Etapa</th><th>Qué se prueba</th><th>Ejemplo</th><th>KPI principal</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:700">1. Ángulo</td><td>Qué narrativa mueve mejor la intención</td><td>Ascenso vs Global vs Credibilidad</td><td>CPL, CVR a lead, calidad</td></tr>
+<tr><td style="font-weight:700">2. Contenido</td><td>Qué enfoque creativo dentro del eje</td><td>Racional vs aspiracional vs testimonial</td><td>CTR, LPV, CVR</td></tr>
+<tr><td style="font-weight:700">3. Formato</td><td>Cómo empaquetar el mensaje</td><td>Estático vs video vs carrusel</td><td>CTR, CPL, costo/landing view</td></tr>
+<tr><td style="font-weight:700">4. Canal</td><td>Dónde se expresa mejor cada eje</td><td>Meta vs Demand Gen vs LinkedIn</td><td>Lead quality, application rate</td></tr>
+</tbody></table>
+
+<div class="claim-box" style="margin-top:14px"><p><strong>Nomenclatura recomendada:</strong> etiquetar cada pieza como <em style="color:var(--amarillo)">vertical_eje_formato_enfoque</em>. Ejemplo: <em style="color:var(--amarillo)">MBA_Ascenso_Video_Aspiracional</em> o <em style="color:var(--amarillo)">STEM_Data_Carrusel_Racional</em>. Si la nomenclatura no está ordenada, después todo parece "insight" cuando en realidad era desorden con presupuesto.</p></div>
+</div></div></div>
+
+<!-- S15: LEADS ANTIGUOS -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>LEADS ANTIGUOS</h2></div></div><div class="slide-desc-col"><p class="subtext">ESTRATEGIA DE REACTIVACIÓN</p><p class="body-text">Casi siempre las matrículas vienen de leads de intakes anteriores.</p></div></div>
+<div class="content-area">
+<div class="timeline-container">
+<div class="timeline-item"><div class="timeline-header"><h3>01. Remarketing avanzado</h3><div class="timeline-tags"><span class="tl-tag highlight">LinkedIn</span><span class="tl-tag highlight">Meta</span></div></div><p class="light-text">Audiencias personalizadas con leads de Spring, Fall y anteriores. Mensajes segmentados por nivel de avance en el funnel.</p></div>
+<div class="timeline-item"><div class="timeline-header"><h3>02. Flujos de automatización</h3><div class="timeline-tags"><span class="tl-tag">Email</span><span class="tl-tag">WhatsApp</span></div></div><p class="light-text">Secuencias automatizadas con contenido personalizado según programa, etapa y mercado.</p></div>
+<div class="timeline-item"><div class="timeline-header"><h3>03. Asistencia con IA</h3><div class="timeline-tags"><span class="tl-tag highlight">Innovación</span></div></div><p class="light-text">Modelos de scoring predictivo para identificar leads con mayor probabilidad de conversión.</p></div>
+<div class="timeline-item"><div class="timeline-header"><h3>04. Análisis de conversión</h3><div class="timeline-tags"><span class="tl-tag">Reporting</span></div></div><p class="light-text">Estudio de tiempos de conversión por intake, canal y mercado para ajustar ventanas.</p></div>
+</div></div>
+</div></div>
+
+<!-- S16: EXPERIMENTACIÓN -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>EXPERIMENTACIÓN</h2></div></div><div class="slide-desc-col"><p class="subtext">ACCIONES QUINCENALES</p><p class="body-text">Nuevas formas de traer volumen, teniendo en cuenta las limitaciones del mercado.</p></div></div>
+<div class="content-area"><div class="two-col">
+<div>
+<h4 style="font-size:.85rem;margin-bottom:10px">Framework</h4>
+<div class="timeline-container" style="margin-top:0">
+<div class="timeline-item"><h3 style="font-size:.85rem">Sem 1-2: Benchmark</h3><p class="light-text">Análisis de competencia. Identificar formatos y canales no explorados.</p></div>
+<div class="timeline-item"><h3 style="font-size:.85rem">Sem 3-4: Test A</h3><p class="light-text">Primer experimento con métricas de éxito definidas.</p></div>
+<div class="timeline-item"><h3 style="font-size:.85rem">Sem 5-6: Análisis + Test B</h3><p class="light-text">Evaluar resultados, iterar. Segundo experimento.</p></div>
+<div class="timeline-item"><h3 style="font-size:.85rem">Sem 7+: Escalar ganadores</h3><p class="light-text">Integrar al mix principal. Ciclo continuo.</p></div>
+</div></div>
+<div>
+<h4 style="font-size:.85rem;margin-bottom:10px">Ideas de experimentos</h4>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div class="stat-card" style="text-align:left;padding:14px 18px"><span class="stat-label">Formatos nuevos</span><p class="light-text" style="font-size:.78rem;margin-top:3px">Carousel Ads LinkedIn, Reels testimoniales, Document Ads, Newsletter Sponsors.</p></div>
+<div class="stat-card" style="text-align:left;padding:14px 18px"><span class="stat-label">Audiencias no exploradas</span><p class="light-text" style="font-size:.78rem;margin-top:3px">Lookalikes de matrículas, segmentos de industria, alumni universidades target.</p></div>
+<div class="stat-card" style="text-align:left;padding:14px 18px"><span class="stat-label">Canales complementarios</span><p class="light-text" style="font-size:.78rem;margin-top:3px">Google Ads (branded + categoría), YouTube pre-roll, partnerships nicho.</p></div>
+<div class="stat-card" style="text-align:left;padding:14px 18px"><span class="stat-label">Redistribución</span><p class="light-text" style="font-size:.78rem;margin-top:3px">Test de redistribución entre canales y mercados basado en performance quincenal.</p></div>
+</div></div>
+</div></div>
+</div></div>
+
+<!-- S17: PRÓXIMOS PASOS -->
+<div class="slide"><div class="slide-inner">
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>PRÓXIMOS PASOS</h2></div></div><div class="slide-desc-col"><p class="subtext">ACCIONABLES</p><p class="body-text">Lo que necesitamos para avanzar y los compromisos de seguimiento.</p></div></div>
+<div class="content-area"><div class="two-col">
+<div>
+<h4 style="font-size:.85rem;margin-bottom:10px">Validaciones Westfield</h4>
+<div class="timeline-container" style="margin-top:0">
+<div class="timeline-item"><p class="light-text">Confirmar fechas BCC Cala (mayo vs abril).</p></div>
+<div class="timeline-item"><p class="light-text">Validar presupuesto B2C $13,600 (+81%).</p></div>
+<div class="timeline-item"><p class="light-text">Definir beneficios y eventos especiales por campaña.</p></div>
+<div class="timeline-item"><p class="light-text">Compartir base de leads históricos para reactivación.</p></div>
+</div></div>
+<div>
+<h4 style="font-size:.85rem;margin-bottom:10px">Compromisos ADCOM</h4>
+<div class="timeline-container" style="margin-top:0">
+<div class="timeline-item"><p class="light-text">Plan de experimentación quincenal (B2C + STEM).</p></div>
+<div class="timeline-item"><p class="light-text">Estrategia reactivación leads con flujos y scoring IA.</p></div>
+<div class="timeline-item"><p class="light-text">Tiempos de maduración por medio y campaña.</p></div>
+<div class="timeline-item"><p class="light-text">Ventanas mínimas óptimas de activación por canal.</p></div>
+</div>
+<div class="claim-box" style="margin-top:12px"><p><strong>Reuniones:</strong> Al menos cada 3 semanas con Felipe Camacho, Johan Oyuela y Daniel Rodríguez.</p></div>
+</div></div></div>
+</div></div>
+
+<div class="nav-controls">
+<button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Anterior</button>
+<button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+</div>
+<div class="progress-bar" id="progress"></div>
+</div>
+
+<script>
+let currentSlide=0;const slides=document.querySelectorAll('.slide');
+function updateSlide(){slides.forEach((s,i)=>s.classList.toggle('active',i===currentSlide));document.getElementById('prevBtn').disabled=currentSlide===0;const b=document.getElementById('nextBtn');b.innerText=currentSlide===slides.length-1?'✓ Fin':'Siguiente →';b.disabled=currentSlide===slides.length-1;document.getElementById('progress').style.width=((currentSlide+1)/slides.length*100)+'%'}
+function changeSlide(d){currentSlide=Math.max(0,Math.min(currentSlide+d,slides.length-1));updateSlide()}
+function toggleAcc(h){const i=h.parentElement;i.parentElement.querySelectorAll('.acc-item').forEach(x=>{if(x!==i){x.classList.remove('open');x.querySelector('.acc-icon').innerText='+'}});const o=i.classList.toggle('open');i.querySelector('.acc-icon').innerText=o?'−':'+'}
+function showMixPanel(id,btn){document.querySelectorAll('.mix-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.mix-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active')}
+function showFlow(id,btn){const p=btn.parentElement;p.querySelectorAll('.mix-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');const c=p.nextElementSibling;c.querySelectorAll('.mix-panel').forEach(p=>p.classList.remove('active'));c.querySelector('#panel-'+id).classList.add('active')}
+function showMix2(id,btn){const p=btn.parentElement;p.querySelectorAll('.mix-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');const c=p.nextElementSibling;c.querySelectorAll('.mix-panel').forEach(p=>p.classList.remove('active'));c.querySelector('#panel-'+id).classList.add('active')}
+function showBench(id,btn){const p=btn.parentElement;p.querySelectorAll('.mix-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');const c=p.nextElementSibling;c.querySelectorAll('.mix-panel').forEach(p=>p.classList.remove('active'));c.querySelector('#panel-'+id).classList.add('active')}
+function showComm(id,btn){const p=btn.parentElement;p.querySelectorAll('.mix-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');const c=p.nextElementSibling;c.querySelectorAll('.mix-panel').forEach(p=>p.classList.remove('active'));c.querySelector('#panel-'+id).classList.add('active')}
+// Seasonality bars
+(function(){const d=[{m:'Ene',v:15,c:'#4CAF50'},{m:'Feb',v:14.2,c:'#4CAF50'},{m:'Mar',v:13.83,c:'#4CAF50'},{m:'Abr',v:15.5,c:'var(--amarillo)'},{m:'May',v:19.8,c:'var(--amarillo)'},{m:'Jun',v:19,c:'var(--amarillo)'},{m:'Jul',v:20.2,c:'var(--gris-medio)'},{m:'Ago',v:20.8,c:'var(--gris-medio)'},{m:'Sep',v:21.3,c:'var(--gris-medio)'},{m:'Oct',v:23.87,c:'#EF5350'},{m:'Nov',v:20.4,c:'var(--gris-medio)'},{m:'Dic',v:21.57,c:'var(--gris-medio)'}];const el=document.getElementById('seasonBars');if(!el)return;d.forEach(i=>{const pct=(i.v/24*100).toFixed(0);el.innerHTML+=`<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:26px;text-align:right;font-weight:600;font-size:.72rem;color:var(--negro);flex-shrink:0">${i.m}</span><div style="flex:1;height:16px;background:#eaeaea;border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${i.c};border-radius:3px"></div></div><span style="width:40px;font-size:.72rem;font-weight:700;color:var(--negro)">$${i.v.toFixed(0)}</span></div>`})})();
+function toggleIndex(){document.getElementById('indexModal').classList.toggle('open')}
+function goToSlide(i){currentSlide=i;updateSlide();toggleIndex()}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')changeSlide(1);if(e.key==='ArrowLeft')changeSlide(-1)});
+updateSlide();
+</script>
+</body>
+</html>
