@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Westfield — Resumen Ejecutivo Summer 2026 | ADCOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--amarillo:#FFC000;--negro:#000;--gris-oscuro:#4F4F4F;--gris-medio:#9E9E9E;--gris-claro:#F9F9F9;--gris-borde:#EAEAEA;--blanco:#FFF;--radius:8px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--gris-claro);color:var(--gris-oscuro);line-height:1.6;min-height:100vh;padding:40px 20px}
+.container{max-width:1200px;margin:0 auto}
+
+/* HEADER */
+.hero{background:var(--negro);border-radius:var(--radius);padding:36px 44px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--amarillo)}
+.hero .tag{font-size:.72rem;font-weight:700;color:var(--amarillo);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.hero h1{font-size:2rem;color:var(--blanco);font-weight:700;letter-spacing:-.5px;line-height:1.15;margin-bottom:8px}
+.hero p{font-size:1rem;color:rgba(255,255,255,.75);font-weight:300;font-style:italic;max-width:800px}
+
+/* SECTION TITLE */
+.section-title{display:flex;align-items:center;gap:14px;margin:32px 0 16px}
+.section-title .bar{background:var(--amarillo);padding:8px 22px;border-radius:6px}
+.section-title h2{font-size:1.05rem;text-transform:uppercase;color:var(--negro);font-weight:700;letter-spacing:-.3px}
+.section-title .line{flex:1;height:1px;background:var(--gris-borde)}
+
+/* ACTION CARDS */
+.actions-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.action-card{background:var(--blanco);border-radius:var(--radius);padding:24px;border:1px solid var(--gris-borde);position:relative;box-shadow:0 2px 12px rgba(0,0,0,.03)}
+.action-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--amarillo);border-radius:0 0 var(--radius) var(--radius)}
+.action-card .num{display:inline-block;background:var(--negro);color:var(--amarillo);font-weight:700;font-size:.78rem;padding:4px 10px;border-radius:4px;margin-bottom:10px}
+.action-card h3{font-size:1.05rem;font-weight:700;color:var(--negro);margin-bottom:14px;line-height:1.25}
+
+.block{margin-bottom:12px}
+.block:last-child{margin-bottom:0}
+.block-label{font-size:.68rem;font-weight:700;color:var(--gris-medio);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.block-text{font-size:.85rem;font-weight:300;color:var(--gris-oscuro);line-height:1.55}
+.block-text strong{color:var(--negro);font-weight:600}
+
+.cost-badge{display:inline-block;background:#fffdf5;color:var(--negro);border:1px solid var(--amarillo);padding:6px 14px;border-radius:50px;font-size:.85rem;font-weight:700;margin:8px 0}
+.cost-badge.free{background:var(--gris-claro);border-color:var(--gris-borde);color:var(--gris-oscuro)}
+
+.actions-list{list-style:none;padding:0;margin:0}
+.actions-list li{font-size:.8rem;font-weight:300;color:var(--gris-oscuro);padding:4px 0 4px 18px;position:relative;line-height:1.5}
+.actions-list li::before{content:'▸';color:var(--amarillo);font-weight:700;position:absolute;left:0;top:4px;font-size:.8rem}
+.actions-list li strong{color:var(--negro);font-weight:600}
+
+/* INVESTMENT TABLE */
+.invest-wrap{background:var(--blanco);border-radius:var(--radius);padding:24px;border:1px solid var(--gris-borde);box-shadow:0 2px 12px rgba(0,0,0,.03)}
+.invest-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.invest-table thead tr{background:var(--negro);color:var(--amarillo)}
+.invest-table th{padding:10px 14px;text-align:left;font-weight:600;font-size:.8rem}
+.invest-table th:not(:first-child){text-align:right}
+.invest-table td{padding:10px 14px;border-bottom:1px solid var(--gris-borde)}
+.invest-table td:not(:first-child){text-align:right}
+.invest-table tbody tr:nth-child(even){background:var(--gris-claro)}
+.invest-table tfoot tr{background:var(--negro);color:var(--amarillo);font-weight:700}
+.invest-table tfoot td{padding:12px 14px;border:none;font-size:.95rem}
+
+.claim{background:var(--negro);border-radius:var(--radius);padding:18px 24px;margin-top:16px;border-left:4px solid var(--amarillo)}
+.claim p{font-size:.88rem;color:var(--blanco);font-weight:300;line-height:1.6;margin:0}
+.claim strong{color:var(--amarillo)}
+
+/* FOOTER */
+.footer{text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid var(--gris-borde);font-size:.75rem;color:var(--gris-medio);font-weight:300}
+
+@media(max-width:768px){
+  .actions-grid{grid-template-columns:1fr}
+  .hero{padding:28px 24px}
+  .hero h1{font-size:1.5rem}
+  body{padding:20px 12px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="tag">Resumen Ejecutivo · Westfield Summer 2026</div>
+  <h1>Acciones clave, aporte estratégico e inversión</h1>
+  <p>Las 6 palancas que activan el intake Summer 2026: qué es, por qué se hace, cómo aporta, cuánto cuesta y qué hay que ejecutar.</p>
+</div>
+
+<!-- ACCIONES CLAVE -->
+<div class="section-title">
+  <div class="bar"><h2>Acciones clave</h2></div>
+  <div class="line"></div>
+</div>
+
+<div class="actions-grid">
+
+<!-- 1 PAUTA B2C -->
+<div class="action-card">
+  <span class="num">01</span>
+  <h3>Pauta B2C — MBA Online</h3>
+  <div class="block"><div class="block-label">Por qué</div><div class="block-text">El insumo B2B se agota a inicios de junio. Necesitamos sostener el volumen de leads hasta cierre del intake en 4 mercados.</div></div>
+  <div class="block"><div class="block-label">Cómo aporta</div><div class="block-text">Motor principal de captación. Genera el pipeline que se convierte en matrículas del intake.</div></div>
+  <div class="cost-badge">$13,600 base · $18,000 expandido</div>
+  <div class="block"><div class="block-label">Qué hacer</div>
+    <ul class="actions-list">
+      <li>Activar 3 campañas: <strong>General, BCC Cala (mayo), Global Ambassadors (junio)</strong></li>
+      <li>91% presupuesto en LinkedIn · México y Perú prioritarios</li>
+      <li>Meta como soporte para Info Sessions y remarketing</li>
+      <li>Validar fechas y presupuesto con Westfield</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2 PAUTA STEM -->
+<div class="action-card">
+  <span class="num">02</span>
+  <h3>Pauta STEM</h3>
+  <div class="block"><div class="block-label">Por qué</div><div class="block-text">Volumen insuficiente. Hubo mejora en perfilación pero CPL subió y volumen bajó. Necesitamos equilibrio.</div></div>
+  <div class="block"><div class="block-label">Cómo aporta</div><div class="block-text">Flujo constante de leads STEM con 7 Info Sessions quincenales. Sunshine Scholarships concentra el 65% como motor principal.</div></div>
+  <div class="cost-badge">$12,000 USD</div>
+  <div class="block"><div class="block-label">Qué hacer</div>
+    <ul class="actions-list">
+      <li>Mix multicanal: <strong>LinkedIn 47% · Meta 32% · Google 21%</strong></li>
+      <li>Redistribuir hacia formatos de mayor volumen sin perder perfil</li>
+      <li>Programar las 7 Info Sessions confirmadas</li>
+      <li>Aplicar acciones experimentales quincenales</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 3 LANDINGS -->
+<div class="action-card">
+  <span class="num">03</span>
+  <h3>Optimización de Landing Pages</h3>
+  <div class="block"><div class="block-label">Por qué</div><div class="block-text">La landing decide la conversión. CVR actual (~2%) está muy debajo del benchmark educación (8-15%). Una mejora del 20% en CVR = -20% CPL.</div></div>
+  <div class="block"><div class="block-label">Cómo aporta</div><div class="block-text">Palanca con mayor ROI disponible. Multiplica el retorno de toda la inversión en pauta. Reduce CPL efectivo 20-40%.</div></div>
+  <div class="cost-badge">$2,000 USD · 10 landings × $200</div>
+  <div class="block"><div class="block-label">Qué hacer</div>
+    <ul class="actions-list">
+      <li>Una landing dedicada por campaña/programa</li>
+      <li><strong>6 métodos de captación:</strong> formulario, brochure, WhatsApp, llamada, chatbot, Info Session</li>
+      <li>Framework CRO en 4 capas: headline → formulario → CTA → prueba social</li>
+      <li>Roadmap 8 semanas: audit, WhatsApp, testing iterativo</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 4 INFLUENCERS -->
+<div class="action-card">
+  <span class="num">04</span>
+  <h3>Contenido con Influencers</h3>
+  <div class="block"><div class="block-label">Por qué</div><div class="block-text">Competimos contra 4 instituciones con décadas de posicionamiento. Los creadores llegan a audiencias LATAM con mensaje auténtico evitando keywords saturados.</div></div>
+  <div class="block"><div class="block-label">Cómo aporta</div><div class="block-text">Credibilidad anclada del creador, audiencias no disputadas y contenido reutilizable (whitelisted ads + Reels + activos landing).</div></div>
+  <div class="cost-badge">$2,300 USD · 10 videos + derechos</div>
+  <div class="block"><div class="block-label">Qué hacer</div>
+    <ul class="actions-list">
+      <li><strong>Mix 10 videos:</strong> 3 testimonio alumni · 3 data/STEM · 2 liderazgo · 2 beca</li>
+      <li>4 usos: orgánico → whitelisted → Reels/TikTok → landing</li>
+      <li>Medir CPL repautado vs pauta tradicional</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 5 REACTIVACIÓN -->
+<div class="action-card">
+  <span class="num">05</span>
+  <h3>Reactivación de Leads Antiguos</h3>
+  <div class="block"><div class="block-label">Por qué</div><div class="block-text">11.590 leads &gt;180 días en base. La data demuestra que reactivar funciona (252 ya se reactivaron, ventana ~77 días). Sin costo de medios adicional.</div></div>
+  <div class="block"><div class="block-label">Cómo aporta</div><div class="block-text">Activa una base ya construida sin pagar captación nueva. Las matrículas casi siempre vienen de leads de intakes anteriores.</div></div>
+  <div class="cost-badge free">Sin costo de medios adicional</div>
+  <div class="block"><div class="block-label">Qué hacer</div>
+    <ul class="actions-list">
+      <li><strong>P1:</strong> 632 descartados con interacción (quick win comercial)</li>
+      <li><strong>P2:</strong> 1.926 abiertos sin avance · <strong>P3:</strong> 4.417 impactados sin interacción · <strong>P4:</strong> 4.615 nunca impactados</li>
+      <li>Programa cíclico 60-90 días para los 252 con historial</li>
+      <li>Scoring predictivo IA + flujos automatización email/WhatsApp</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 6 COMUNICACIÓN -->
+<div class="action-card">
+  <span class="num">06</span>
+  <h3>Comunicación y Ángulos de Pauta</h3>
+  <div class="block"><div class="block-label">Por qué</div><div class="block-text">Diferenciación clara vs Spring 2026 y sistema para medir qué narrativa convierte, no solo qué pieza aislada funcionó.</div></div>
+  <div class="block"><div class="block-label">Cómo aporta</div><div class="block-text">Ordena la producción creativa bajo 6 ejes con propósito, permite testing comparativo y construye narrativa coherente por vertical.</div></div>
+  <div class="cost-badge free">Sin costo adicional (operación creativa)</div>
+  <div class="block"><div class="block-label">Qué hacer</div>
+    <ul class="actions-list">
+      <li><strong>6 ángulos:</strong> Ascenso · Global · Datos/Tech · Perfil híbrido · Credibilidad · Oportunidad</li>
+      <li>MBA core: ascenso, global, credibilidad · STEM core: datos, híbrido, global</li>
+      <li>Testing en 4 fases: ángulo → mensaje → formato → escalar</li>
+      <li>Nomenclatura: <em>vertical_eje_formato_enfoque</em></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<!-- INVERSIÓN CONSOLIDADA -->
+<div class="section-title">
+  <div class="bar"><h2>Inversión consolidada</h2></div>
+  <div class="line"></div>
+</div>
+
+<div class="invest-wrap">
+<table class="invest-table">
+<thead><tr><th>Concepto</th><th>Escenario base</th><th>Escenario expandido</th></tr></thead>
+<tbody>
+<tr><td><strong>Pauta B2C</strong> — MBA Online</td><td>$13,600</td><td>$18,000</td></tr>
+<tr><td><strong>Pauta STEM</strong> — 7 Info Sessions + Sunshine</td><td>$12,000</td><td>$12,000</td></tr>
+<tr><td><strong>Landings</strong> — 10 × $200</td><td>$2,000</td><td>$2,000</td></tr>
+<tr><td><strong>Influencers</strong> — 10 videos + repauta</td><td>$2,300</td><td>$2,300</td></tr>
+</tbody>
+<tfoot><tr><td>TOTAL INVERSIÓN SUMMER 2026</td><td>$29,900</td><td>$34,300</td></tr></tfoot>
+</table>
+
+<div class="claim"><p>Los <strong>$4,300 USD adicionales</strong> (Landings + Influencers) representan solo el <strong>14-15% del presupuesto total</strong> pero son la palanca de eficiencia que multiplica el ROI de toda la inversión en pauta.</p></div>
+</div>
+
+<div class="footer">Westfield · Ruta Estratégica Summer 2026 · 21 marzo – 11 julio 2026 · ADCOM</div>
+
+</div>
+</body>
+</html>
