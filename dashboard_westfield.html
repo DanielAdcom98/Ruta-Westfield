@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard Westfield · Summer 26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif;background:#F5F5F5;color:#1A1A1A;font-size:13px;line-height:1.5}
+.page{max-width:1280px;margin:0 auto;padding:24px 20px}
+
+/* ── HEADER ──────────────────────────────── */
+.topbar{
+  background:#1A1A1A;
+  border-radius:10px;
+  padding:12px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.logo-circle{
+  width:36px;height:36px;border-radius:50%;
+  background:#FFC000;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;color:#1A1A1A;
+  flex-shrink:0
+}
+.t-title{font-size:17px;font-weight:700;color:#FFFFFF;letter-spacing:-.2px}
+.t-sub{font-size:10px;color:#999;margin-top:1px;font-style:italic;font-weight:300}
+.controls{display:flex;align-items:center;gap:10px}
+#ts{font-size:10px;color:#666;font-weight:300}
+.btn{
+  padding:6px 14px;background:transparent;border:1px solid #444;
+  border-radius:7px;cursor:pointer;font-size:11px;color:#CCC;
+  font-family:'Poppins',sans-serif;font-weight:500;transition:all .15s;
+}
+.btn:hover{background:#2a2a2a;border-color:#666;color:#FFC000}
+
+/* ── SECTIONS ──────────────────────────── */
+section{margin-bottom:28px}
+.sec-label{
+  font-size:9px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.12em;color:#888;margin-bottom:8px
+}
+.sec-desc{font-size:10px;color:#AAA;margin-top:-6px;margin-bottom:8px;font-style:italic;font-weight:300}
+
+/* ── CARDS ──────────────────────────────── */
+.card{
+  background:#FFFFFF;
+  border-radius:10px;
+  border:1px solid #E0E0E0;
+  overflow:hidden;
+  position:relative;
+}
+.card::after{
+  content:'';
+  display:block;
+  height:5px;
+  background:#FFC000;
+  width:100%;
+}
+
+/* ── KPI ROW ────────────────────────────── */
+.kpi-row{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.kpi{
+  flex:1;min-width:140px;
+  background:#FFFFFF;border:1px solid #E0E0E0;
+  border-radius:10px;padding:14px 16px 18px;
+  position:relative;overflow:hidden;
+}
+.kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:#FFC000}
+.kpi-val{font-size:22px;font-weight:700;color:#1A1A1A;line-height:1.1}
+.kpi-label{font-size:8.5px;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+.kpi-sub{font-size:7px;color:#999;font-weight:300;margin-top:2px}
+
+/* ── TABLES ──────────────────────────────── */
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;white-space:nowrap}
+th{
+  padding:9px 13px;font-size:9px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em;
+  color:#FFFFFF;background:#1A1A1A;text-align:left;
+}
+th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
+td{padding:8px 13px;border-bottom:1px solid #F0F0F0;color:#333;font-size:12px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr.dr:nth-child(even) td{background:#FAFAFA}
+tr.dr:hover td{background:#FFF8E1}
+tr.tr td{background:#FFC000;font-weight:700;color:#1A1A1A;border-bottom:none;border-top:1px solid #E0C000}
+tr.gr td{background:#1A1A1A;color:#FFFFFF;font-weight:600;font-size:11px}
+tr.sr td:first-child{padding-left:26px;color:#888;font-weight:300}
+tr.sr td{font-size:11px}
+.neg{color:#EF5350;font-weight:600}
+.pos{color:#4CAF50;font-weight:600}
+.dim{color:#999;font-weight:300}
+
+/* ── BADGES ─────────────────────────────── */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.05em}
+.li{background:#E3ECF7;color:#1155CC}
+.me{background:#E7F0FF;color:#1877F2}
+.go{background:#FCE8E6;color:#C5221F}
+.ot{background:#F0F0F0;color:#555}
+
+/* ── BAR ─────────────────────────────────── */
+.bar-wrap{display:flex;align-items:center;gap:7px}
+.bar-track{flex:1;height:6px;background:#F0F0F0;border-radius:3px;overflow:hidden;min-width:70px}
+.bar-fill{height:100%;border-radius:3px;transition:width .4s ease}
+.bar-pct{font-size:10px;min-width:38px;text-align:right;color:#666;font-weight:600}
+
+/* ── LOADING ─────────────────────────────── */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #E0E0E0;border-top-color:#FFC000;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading{text-align:center;padding:56px 20px;color:#AAA}
+.err{text-align:center;padding:40px;color:#EF5350;font-size:13px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="logo-circle">W</div>
+      <div>
+        <div class="t-title">Dashboard Westfield · Summer 26</div>
+        <div class="t-sub">B2C &amp; STEM · Inversión y seguimiento de pauta</div>
+      </div>
+    </div>
+    <div class="controls">
+      <span id="ts">—</span>
+      <button class="btn" onclick="load()">↺ Actualizar</button>
+    </div>
+  </div>
+
+  <div id="root"><div class="loading"><span class="spin"></span>Cargando datos del Sheet...</div></div>
+</div>
+
+<script>
+const API = 'https://script.google.com/macros/s/AKfycby8VMuesT-fQWUwm69EgH9L5T7Yiakm1YbrTvaBOlJXDBY5jti9Ixu3mBE_jryl4u2Muw/exec';
+
+/* ── UTILS ───────────────────────────────── */
+function pm(v) {
+  if (typeof v === 'number') return v;
+  if (!v && v !== 0) return 0;
+  return parseFloat(String(v).replace(/[\s$]/g,'').replace(/\./g,'').replace(',','.')) || 0;
+}
+function fm(n) {
+  if (n === undefined || n === null || n === '') return '';
+  const abs = Math.abs(Math.round(n));
+  return (n < 0 ? '-' : '') + '$' + abs.toLocaleString('en-US');
+}
+function badge(m) {
+  const u = (m||'').toUpperCase().trim();
+  if (u==='LINKEDIN') return `<span class="badge li">LINKEDIN</span>`;
+  if (u==='META')     return `<span class="badge me">META</span>`;
+  if (u==='GOOGLE')   return `<span class="badge go">GOOGLE</span>`;
+  return m ? `<span class="badge ot">${m}</span>` : '';
+}
+function barColor(m) {
+  const u = (m||'').toUpperCase();
+  if (u==='LINKEDIN') return '#1155CC';
+  if (u==='META')     return '#1877F2';
+  if (u==='GOOGLE')   return '#EA4335';
+  return '#FFC000';
+}
+
+/* ── 1. KPIs GLOBALES ───────────────────── */
+function buildKPIs(b2c, stem) {
+  function totals(rows) {
+    if (!rows||rows.length<2) return {ej:0,pre:0,leads:0};
+    const h = rows[0].map(x=>String(x||'').trim());
+    const ei=h.indexOf('Ejecutado'), pi=h.indexOf('Presupuestado'), li=h.indexOf('Leads esperados'), mi=h.indexOf('Medio');
+    let ej=0,pre=0,leads=0;
+    for(let i=1;i<rows.length;i++){
+      const r=rows[i];
+      if(!r[mi]) continue;              // ← solo saltar filas sin medio
+      ej    += pm(r[ei]);
+      pre   += pm(r[pi]);
+      leads += parseFloat(r[li])||0;
+    }
+    return {ej,pre,leads};
+  }
+  const t2 = totals(b2c), t3 = totals(stem);
+  const totEj  = t2.ej+t3.ej;
+  const totPre = t2.pre+t3.pre;
+  const totLd  = t2.leads+t3.leads;
+  const pctGlob = totPre ? (totEj/totPre*100) : 0;
+
+  return `<div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-val">${fm(totEj)}</div>
+      <div class="kpi-label">Total ejecutado</div>
+      <div class="kpi-sub">B2C + STEM Summer 26</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">${fm(totPre)}</div>
+      <div class="kpi-label">Presupuesto total</div>
+      <div class="kpi-sub">B2C + STEM Summer 26</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">${pctGlob.toFixed(1)}%</div>
+      <div class="kpi-label">% ejecución</div>
+      <div class="kpi-sub">Sobre presupuesto total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">${fm(t2.ej)}</div>
+      <div class="kpi-label">B2C ejecutado</div>
+      <div class="kpi-sub">Ppto: ${fm(t2.pre)}</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">${fm(t3.ej)}</div>
+      <div class="kpi-label">STEM ejecutado</div>
+      <div class="kpi-sub">Ppto: ${fm(t3.pre)}</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">${Math.round(totLd)}</div>
+      <div class="kpi-label">Leads esperados</div>
+      <div class="kpi-sub">B2C + STEM combinado</div>
+    </div>
+  </div>`;
+}
+
+/* ── 2. RESUMEN FLOW ────────────────────── */
+function buildSummary(b2c, stem) {
+  const grp = {};
+  function process(rows, linea) {
+    if (!rows||rows.length<2) return;
+    const h = rows[0].map(x=>String(x||'').trim());
+    const mi=h.indexOf('Medio'), ei=h.indexOf('Ejecutado'), pi=h.indexOf('Presupuestado');
+    if (mi<0||ei<0) return;
+    for (let i=1;i<rows.length;i++) {
+      const r=rows[i];
+      const med=String(r[mi]||'').trim();
+      if (!med) continue;                  // ← FIX: NO filtrar por ejecutado==0
+      const k=linea+'|'+med;
+      if (!grp[k]) grp[k]={linea,medio:med,ej:0,pre:0};
+      grp[k].ej  += pm(r[ei]);
+      grp[k].pre += pm(r[pi]);
+    }
+  }
+  process(b2c,'B2C'); process(stem,'STEM');
+
+  const rows  = Object.values(grp).sort((a,b)=>a.linea.localeCompare(b.linea)||b.ej-a.ej);
+  const totEj = rows.reduce((s,r)=>s+r.ej,  0);
+  const totPre= rows.reduce((s,r)=>s+r.pre, 0);
+
+  let t=`<div class="card"><div class="scroll"><table>
+<thead><tr>
+  <th>Línea</th><th>Medio</th>
+  <th class="r">Ejecutado</th><th class="r">Presupuestado</th><th class="r">Saldo</th>
+  <th style="min-width:140px">% del total ejecutado</th>
+</tr></thead><tbody>`;
+
+  let lastL='';
+  rows.forEach(r=>{
+    const pct = totEj ? r.ej/totEj*100 : 0;
+    const saldo = r.pre - r.ej;
+    const same = r.linea===lastL; lastL=r.linea;
+    t+=`<tr class="dr">
+      <td>${same?'':'<strong>'+r.linea+'</strong>'}</td>
+      <td>${badge(r.medio)}</td>
+      <td class="r"><strong>${fm(r.ej)}</strong></td>
+      <td class="r dim">${fm(r.pre)}</td>
+      <td class="r ${saldo<0?'neg':'pos'}">${fm(saldo)}</td>
+      <td><div class="bar-wrap">
+        <div class="bar-track"><div class="bar-fill" style="width:${Math.min(pct,100).toFixed(1)}%;background:${barColor(r.medio)}"></div></div>
+        <span class="bar-pct">${pct.toFixed(1)}%</span>
+      </div></td>
+    </tr>`;
+  });
+  t+=`<tr class="tr">
+    <td colspan="2">Total general</td>
+    <td class="r">${fm(totEj)}</td>
+    <td class="r">${fm(totPre)}</td>
+    <td class="r">${fm(totPre-totEj)}</td>
+    <td>100%</td>
+  </tr></tbody></table></div></div>`;
+  return t;
+}
+
+/* ── 3. SALDO + EJECUTADO ──────────────── */
+function buildSaldo(data) {
+  if (!data||data.length<3) return '<div class="err">Sin datos de SALDO + EJECUTADO</div>';
+  let hdr=-1;
+  for(let i=0;i<data.length;i++) if(String(data[i][1]||'').trim()==='Campaña'){hdr=i;break;}
+  if(hdr<0) hdr=1;
+  const h=data[hdr];
+  const mains=new Set(['Branding (sin programatic)','MBA Online','STEM','Total general']);
+
+  let t=`<div class="card"><div class="scroll"><table>
+<thead><tr>
+  <th style="min-width:220px">Campaña</th>
+  <th class="r">${h[2]||'Enero'}</th><th class="r">${h[3]||'Febrero'}</th>
+  <th class="r">${h[4]||'Marzo'}</th><th class="r">${h[5]||'Abril'}</th>
+  <th class="r">Total</th>
+</tr></thead><tbody>`;
+
+  for(let i=hdr+1;i<data.length;i++){
+    const r=data[i];
+    const lbl=String(r[1]||'').trim();
+    if(!lbl) continue;
+    const isMain=mains.has(lbl), isTotal=lbl==='Total general';
+    const cls=isTotal?'tr':isMain?'gr':'sr';
+    const c1=isMain?`<td><strong>${lbl}</strong></td>`:`<td style="padding-left:24px;color:#888;font-weight:300">${lbl}</td>`;
+    const cell=v=>v!==''&&v!==undefined&&v!==null
+      ?`<td class="r">${isTotal||isMain?'<strong>'+fm(pm(v))+'</strong>':fm(pm(v))}</td>`
+      :`<td></td>`;
+    t+=`<tr class="${cls}">${c1}${cell(r[2])}${cell(r[3])}${cell(r[4])}${cell(r[5])}${cell(r[6])}</tr>`;
+  }
+  t+=`</tbody></table></div></div>`;
+  return t;
+}
+
+/* ── 4. TABLAS DETALLE ─────────────────── */
+function buildDetail(data) {
+  if (!data||data.length<2) return '<div class="err">Sin datos</div>';
+  const h=data[0].map(x=>String(x||'').trim());
+
+  const stopCols=new Set(['Tasa conv. esperada']);
+  const showCols=[];
+  for(let i=0;i<h.length;i++){
+    if(!h[i]) break;
+    showCols.push({name:h[i],idx:i});
+    if(stopCols.has(h[i])) break;
+  }
+
+  const numSet=new Set(['Ejecutado','Presupuestado','Saldo','CPL esperado','Leads esperados','Cierre esperado','Diario']);
+  const pctSet=new Set(['%','Tasa conv. esperada']);
+  const medioIdx=h.indexOf('Medio');
+  const ejIdx=h.indexOf('Ejecutado'), preIdx=h.indexOf('Presupuestado');
+  const leadsIdx=h.indexOf('Leads esperados');
+
+  let totEj=0,totPre=0,totLeads=0;
+  let tbody='';
+
+  for(let i=1;i<data.length;i++){
+    const r=data[i];
+    if(!r[medioIdx]) continue;
+    totEj   +=pm(r[ejIdx]);
+    totPre  +=pm(r[preIdx]);
+    totLeads+=parseFloat(r[leadsIdx])||0;
+
+    tbody+='<tr class="dr">';
+    showCols.forEach(c=>{
+      const v=r[c.idx];
+      if(c.name==='Medio'){
+        tbody+=`<td>${badge(v)}</td>`;
+      } else if(c.name==='Saldo'){
+        const n=pm(v);
+        tbody+=`<td class="r ${n<0?'neg':n>0?'pos':''}">${fm(n)}</td>`;
+      } else if(numSet.has(c.name)){
+        tbody+=`<td class="r">${v!==''&&v!==undefined&&v!==null?fm(pm(v)):''}</td>`;
+      } else if(pctSet.has(c.name)){
+        tbody+=`<td class="r dim">${v||''}</td>`;
+      } else {
+        tbody+=`<td>${v!==undefined&&v!==null?v:''}</td>`;
+      }
+    });
+    tbody+='</tr>';
+  }
+
+  const saldoTot=totPre-totEj;
+  tbody+='<tr class="tr">';
+  showCols.forEach(c=>{
+    if     (c.name==='Canal')            tbody+=`<td>Total</td>`;
+    else if(c.name==='Ejecutado')        tbody+=`<td class="r">${fm(totEj)}</td>`;
+    else if(c.name==='Presupuestado')    tbody+=`<td class="r">${fm(totPre)}</td>`;
+    else if(c.name==='Saldo')            tbody+=`<td class="r ${saldoTot<0?'neg':'pos'}">${fm(saldoTot)}</td>`;
+    else if(c.name==='Leads esperados')  tbody+=`<td class="r">${Math.round(totLeads)}</td>`;
+    else tbody+=`<td></td>`;
+  });
+  tbody+='</tr>';
+
+  let t=`<div class="card"><div class="scroll"><table><thead><tr>`;
+  showCols.forEach(c=>{
+    const isR=numSet.has(c.name)||pctSet.has(c.name);
+    t+=`<th ${isR?'class="r"':''}>${c.name}</th>`;
+  });
+  t+=`</tr></thead><tbody>${tbody}</tbody></table></div></div>`;
+  return t;
+}
+
+/* ── RENDER & LOAD ───────────────────────── */
+function render(j) {
+  const b2c=j['B2C SUMMER 26'], stem=j['STEM SUMMER 26'], sald=j['SALDO + EJECUTADO'];
+  const now=new Date().toLocaleString('es',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('ts').textContent='Actualizado: '+now;
+
+  document.getElementById('root').innerHTML=`
+    <section>
+      <div class="sec-label">Resumen general — KPIs Summer 26</div>
+      ${buildKPIs(b2c,stem)}
+    </section>
+    <section>
+      <div class="sec-label">Resumen Flow — Inversión por Línea y Medio</div>
+      <div class="sec-desc">Consolidado B2C Summer 26 + STEM Summer 26</div>
+      ${buildSummary(b2c,stem)}
+    </section>
+    <section>
+      <div class="sec-label">Saldo + Ejecutado · 1 enero al 15 abril</div>
+      ${buildSaldo(sald)}
+    </section>
+    <section>
+      <div class="sec-label">B2C Summer 26 — Detalle completo</div>
+      ${buildDetail(b2c)}
+    </section>
+    <section>
+      <div class="sec-label">STEM Summer 26 — Detalle completo</div>
+      ${buildDetail(stem)}
+    </section>
+  `;
+}
+
+function load() {
+  document.getElementById('ts').innerHTML='<span class="spin"></span>';
+  const cb='cb_'+Date.now();
+  window[cb]=function(data){
+    try{render(data);}catch(e){
+      document.getElementById('root').innerHTML=`<div class="err">Error al renderizar: ${e.message}</div>`;
+    }
+    delete window[cb];
+    const el=document.getElementById('jsonp_script');
+    if(el) el.remove();
+  };
+  const old=document.getElementById('jsonp_script');
+  if(old) old.remove();
+  const s=document.createElement('script');
+  s.id='jsonp_script';
+  s.onerror=function(){
+    document.getElementById('ts').textContent='Error de red';
+    document.getElementById('root').innerHTML=`<div class="err">No se pudo conectar con el Apps Script.<br><small>Verifica que esté publicado como acceso "Cualquier persona".</small></div>`;
+  };
+  s.src=API+'?callback='+cb;
+  document.head.appendChild(s);
+}
+
+load();
+setInterval(load,60000);
+</script>
+</body>
+</html>
