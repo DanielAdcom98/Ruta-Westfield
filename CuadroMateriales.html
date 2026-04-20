@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Westfield | Cuadro de materiales paid media</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amarillo: #FFC000;
+      --negro: #000000;
+      --gris-oscuro: #4F4F4F;
+      --gris-medio: #9E9E9E;
+      --gris-claro: #F9F9F9;
+      --gris-borde: #EAEAEA;
+      --blanco: #FFFFFF;
+      --radius: 8px;
+      --input-bg: #FFFFFF;
+      --input-line: #D9D9D9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--gris-claro);
+      color: var(--gris-oscuro);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 1500px; margin: 0 auto; }
+
+    .hero {
+      background: var(--negro);
+      border-radius: var(--radius);
+      padding: 36px 44px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: var(--amarillo);
+    }
+
+    .hero .tag {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--amarillo);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      color: var(--blanco);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: rgba(255,255,255,.75);
+      font-weight: 300;
+      font-style: italic;
+      max-width: 980px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 32px 0 16px;
+    }
+
+    .section-title .bar {
+      background: var(--amarillo);
+      padding: 8px 22px;
+      border-radius: 6px;
+    }
+
+    .section-title h2 {
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      color: var(--negro);
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .section-title .line { flex: 1; height: 1px; background: var(--gris-borde); }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .note-card {
+      background: var(--blanco);
+      border-radius: var(--radius);
+      padding: 22px;
+      border: 1px solid var(--gris-borde);
+      position: relative;
+      box-shadow: 0 2px 12px rgba(0,0,0,.03);
+    }
+
+    .note-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--amarillo);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .note-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--negro);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .note-card p, .note-card li {
+      font-size: .84rem;
+      font-weight: 300;
+      color: var(--gris-oscuro);
+      line-height: 1.6;
+    }
+
+    .note-card ul { list-style: none; padding: 0; margin: 0; }
+    .note-card li { padding: 4px 0 4px 18px; position: relative; }
+    .note-card li::before {
+      content: '▸';
+      color: var(--amarillo);
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+      top: 4px;
+      font-size: .8rem;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 14px;
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.03);
+    }
+
+    .control label {
+      display: block;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--gris-medio);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 6px;
+    }
+
+    .select,
+    .qty-box,
+    .field,
+    .area {
+      width: 100%;
+      border: 1px solid var(--input-line);
+      border-radius: 6px;
+      background: var(--input-bg);
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: .8rem;
+      color: var(--gris-oscuro);
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .select:focus,
+    .qty-box:focus,
+    .field:focus,
+    .area:focus {
+      border-color: var(--amarillo);
+      box-shadow: 0 0 0 3px rgba(255,192,0,.15);
+    }
+
+    .btn {
+      align-self: end;
+      border: 1px solid var(--negro);
+      background: var(--negro);
+      color: var(--amarillo);
+      border-radius: 6px;
+      padding: 11px 16px;
+      font-family: inherit;
+      font-size: .8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover { opacity: .92; }
+    .btn:active { transform: translateY(1px); }
+
+    .table-wrap {
+      background: var(--blanco);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--gris-borde);
+      box-shadow: 0 2px 12px rgba(0,0,0,.03);
+      overflow: hidden;
+    }
+
+    .table-scroll { overflow-x: auto; border-radius: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 2300px;
+      font-size: .82rem;
+    }
+
+    thead tr { background: var(--negro); color: var(--amarillo); }
+
+    th {
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: .76rem;
+      vertical-align: top;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+
+    th:last-child { border-right: none; }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+      color: var(--gris-oscuro);
+      font-weight: 300;
+      line-height: 1.55;
+      background: var(--blanco);
+    }
+
+    tbody tr:nth-child(even) td { background: var(--gris-claro); }
+    tbody tr:hover td { background: #fffdf5; }
+    tr.hidden-row { display: none; }
+
+    .medium-tag,
+    .role-tag {
+      display: inline-block;
+      border-radius: 50px;
+      padding: 5px 11px;
+      font-size: .72rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+
+    .medium-meta { background: #fff7df; color: var(--negro); border: 1px solid var(--amarillo); }
+    .medium-linkedin { background: #F5F8FF; color: #0A66C2; border: 1px solid #DCE8FF; }
+    .medium-google { background: #F3F3F3; color: var(--negro); border: 1px solid #E5E5E5; }
+    .role-core { background: #F5F5F5; color: var(--negro); border: 1px solid #E7E7E7; }
+    .role-support { background: #FFF8E8; color: #7A5A00; border: 1px solid #FFE08A; }
+
+    .small {
+      display: inline-block;
+      font-size: .72rem;
+      color: var(--gris-medio);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .qty-box { max-width: 88px; text-align: center; font-weight: 600; }
+    .area { min-height: 90px; resize: vertical; }
+    .field::placeholder, .area::placeholder, .qty-box::placeholder { color: #B3B3B3; }
+
+    .adapt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      min-width: 340px;
+    }
+
+    .adapt-box {
+      border: 1px solid var(--gris-borde);
+      border-radius: 6px;
+      padding: 10px;
+      background: rgba(255,255,255,.75);
+    }
+
+    .adapt-title {
+      display: block;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--negro);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 8px;
+    }
+
+    .adapt-sub {
+      display: block;
+      font-size: .66rem;
+      font-weight: 600;
+      color: var(--gris-medio);
+      text-transform: uppercase;
+      margin: 10px 0 6px;
+    }
+
+    .naming {
+      display: grid;
+      gap: 8px;
+      font-size: .76rem;
+      color: var(--negro);
+      font-weight: 500;
+      line-height: 1.45;
+      min-width: 210px;
+    }
+
+    .footer-box {
+      background: var(--negro);
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      margin-top: 16px;
+      border-left: 4px solid var(--amarillo);
+    }
+
+    .footer-box h3 {
+      font-size: .95rem;
+      color: var(--amarillo);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .footer-box ul { list-style: none; padding: 0; margin: 0; }
+    .footer-box li {
+      font-size: .84rem;
+      color: var(--blanco);
+      font-weight: 300;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .footer-box li::before {
+      content: '•';
+      color: var(--amarillo);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 700;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--gris-borde);
+      font-size: .75rem;
+      color: var(--gris-medio);
+      font-weight: 300;
+    }
+
+    @media (max-width: 1100px) {
+      .notes-grid { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; }
+      .hero { padding: 28px 24px; }
+      .hero h1 { font-size: 1.55rem; }
+      body { padding: 20px 12px; }
+      .table-wrap { padding: 16px; }
+      .adapt-grid { grid-template-columns: 1fr; min-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="tag">Cuadro de materiales · Westfield Paid Media</div>
+      <h1>Solicitud de piezas por medio, objetivo y ángulo de venta</h1>
+      <p>Plantilla editable para diligenciar un mismo mensaje con sus adaptaciones por formato, filtrar la vista por medio o ángulo, y exportar la información a CSV para llevarla a Excel o Google Sheets.</p>
+    </section>
+
+    <div class="section-title">
+      <div class="bar"><h2>Consideraciones generales</h2></div>
+      <div class="line"></div>
+    </div>
+
+    <section class="notes-grid">
+      <article class="note-card">
+        <h3>Una sola fila por mensaje</h3>
+        <p>Cada línea representa una sola idea o mensaje. Dentro de esa misma fila se piden sus adaptaciones por formato, para que no queden duplicadas como si fueran campañas distintas.</p>
+      </article>
+      <article class="note-card">
+        <h3>Filtros funcionales</h3>
+        <ul>
+          <li>Filtra por <strong>medio</strong>.</li>
+          <li>Filtra por <strong>ángulo de venta</strong>.</li>
+          <li>Exporta lo diligenciado a <strong>CSV</strong>.</li>
+        </ul>
+      </article>
+      <article class="note-card">
+        <h3>Sobre Google Sheets</h3>
+        <p>Esta versión puede exportar a CSV. Para guardar directo en Sheets sí es posible, pero requiere conectar el HTML con Google Apps Script o un formulario/endpoint intermedio.</p>
+      </article>
+    </section>
+
+    <div class="section-title">
+      <div class="bar"><h2>Filtros y exportación</h2></div>
+      <div class="line"></div>
+    </div>
+
+    <section class="toolbar">
+      <div class="control">
+        <label for="filterMedium">Filtrar por medio</label>
+        <select id="filterMedium" class="select">
+          <option value="all">Todos los medios</option>
+          <option value="Meta Ads">Meta Ads</option>
+          <option value="LinkedIn">LinkedIn</option>
+          <option value="Google">Google</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="filterAngle">Filtrar por ángulo de venta</label>
+        <select id="filterAngle" class="select">
+          <option value="all">Todos los ángulos</option>
+          <option value="Ascenso profesional y reposicionamiento">Ascenso profesional y reposicionamiento</option>
+          <option value="Dominio de datos, tecnología y decisiones basadas en evidencia">Dominio de datos, tecnología y decisiones basadas en evidencia</option>
+          <option value="Liderazgo global y proyección internacional">Liderazgo global y proyección internacional</option>
+          <option value="Credibilidad, respaldo y prueba social">Credibilidad, respaldo y prueba social</option>
+          <option value="Oportunidad de acceso y momento de decisión">Oportunidad de acceso y momento de decisión</option>
+          <option value="Datos, tecnología y perfil híbrido">Datos, tecnología y perfil híbrido</option>
+        </select>
+      </div>
+      <button class="btn" id="exportCsvBtn">Exportar a CSV</button>
+    </section>
+
+    <div class="section-title">
+      <div class="bar"><h2>Cuadro editable</h2></div>
+      <div class="line"></div>
+    </div>
+
+    <section class="table-wrap">
+      <div class="table-scroll">
+        <table id="materialsTable">
+          <thead>
+            <tr>
+              <th>Medio</th>
+              <th>Objetivo</th>
+              <th>Vertical</th>
+              <th>Ángulo de venta</th>
+              <th>Rol</th>
+              <th>Mensaje / pieza base</th>
+              <th>Adaptaciones</th>
+              <th>Qué pedir al equipo creativo</th>
+              <th>Caption / lineamientos</th>
+              <th>Recomendaciones estratégicas</th>
+              <th>Nomenclatura sugerida</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-medium="Meta Ads" data-angle="Ascenso profesional y reposicionamiento">
+              <td><span class="medium-tag medium-meta">Meta Ads</span><br><span class="small">Conversiones</span></td>
+              <td>Generación de leads / registros</td>
+              <td>MBA Online</td>
+              <td>Ascenso profesional y reposicionamiento</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Un mismo mensaje de ascenso profesional aplicado a Meta Conversiones.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">1:1</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1080 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_1x1">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza 1:1" data-export="link_1x1">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Story</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1920 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_story">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza story" data-export="link_story">
+                  </div>
+                </div>
+              </td>
+              <td>Visual principal por eje, con espacio limpio para titular y CTA. Tono ejecutivo y aspiracional.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>Ideal para validar intención. Priorizar beneficio profesional claro y lectura rápida en mobile.</td>
+              <td class="naming"><div>MBA_Ascenso_Static_1x1</div><div>MBA_Ascenso_Story_9x16</div></td>
+            </tr>
+
+            <tr data-medium="Meta Ads" data-angle="Dominio de datos, tecnología y decisiones basadas en evidencia">
+              <td><span class="medium-tag medium-meta">Meta Ads</span><br><span class="small">Conversiones</span></td>
+              <td>Generación de leads / registros</td>
+              <td>STEM</td>
+              <td>Dominio de datos, tecnología y decisiones basadas en evidencia</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Un mismo mensaje técnico-estratégico aplicado a Meta Conversiones.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">1:1</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1080 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_1x1">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza 1:1" data-export="link_1x1">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Story</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1920 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_story">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza story" data-export="link_story">
+                  </div>
+                </div>
+              </td>
+              <td>Visuales que muestren analítica, tecnología, dashboards o trabajo aplicado con enfoque profesional.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>Hablar de relevancia futura y capacidad concreta. Mejor utilidad que discurso abstracto.</td>
+              <td class="naming"><div>STEM_Data_Static_1x1</div><div>STEM_Data_Story_9x16</div></td>
+            </tr>
+
+            <tr data-medium="Meta Ads" data-angle="Liderazgo global y proyección internacional">
+              <td><span class="medium-tag medium-meta">Meta Ads</span><br><span class="small">Alcance</span></td>
+              <td>Awareness / consideración inicial</td>
+              <td>MBA + STEM</td>
+              <td>Liderazgo global y proyección internacional</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Un mismo mensaje aspiracional de visión global aplicado a Meta Alcance.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">1:1</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1080 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_1x1">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza 1:1" data-export="link_1x1">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Story</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1920 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_story">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza story" data-export="link_story">
+                  </div>
+                </div>
+              </td>
+              <td>Visual institucional o aspiracional que comunique visión internacional, networking y prestigio.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>Útil para abrir conversación de marca. Debe sentirse premium y menos promocional.</td>
+              <td class="naming"><div>Global_Static_1x1</div><div>Global_Story_9x16</div></td>
+            </tr>
+
+            <tr data-medium="Meta Ads" data-angle="Credibilidad, respaldo y prueba social">
+              <td><span class="medium-tag medium-meta">Meta Ads</span><br><span class="small">Conversiones / Remarketing</span></td>
+              <td>Reducir fricción</td>
+              <td>MBA + STEM</td>
+              <td>Credibilidad, respaldo y prueba social</td>
+              <td><span class="role-tag role-support">Soporte</span></td>
+              <td>Un mismo mensaje de respaldo institucional aplicado a Meta Remarketing.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">1:1</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1080 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_1x1">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza 1:1" data-export="link_1x1">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Story</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1920 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_story">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza story" data-export="link_story">
+                  </div>
+                </div>
+              </td>
+              <td>Piezas con señales de confianza: acreditación, comunidad, trayectoria, faculty, outcomes o testimonios.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>Especialmente útil en audiencias tibias o retargeting. Debe responder “sí, esto es serio”.</td>
+              <td class="naming"><div>Brand_Credibilidad_Static_1x1</div><div>Brand_Credibilidad_Story_9x16</div></td>
+            </tr>
+
+            <tr data-medium="Meta Ads" data-angle="Oportunidad de acceso y momento de decisión">
+              <td><span class="medium-tag medium-meta">Meta Ads</span><br><span class="small">Conversiones</span></td>
+              <td>Activar decisión</td>
+              <td>STEM + MBA</td>
+              <td>Oportunidad de acceso y momento de decisión</td>
+              <td><span class="role-tag role-support">Soporte</span></td>
+              <td>Un mismo mensaje de oportunidad aplicado a Meta Conversiones.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">1:1</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1080 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_1x1">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza 1:1" data-export="link_1x1">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Story</span>
+                    <span class="adapt-sub">Medida</span>
+                    <div>1080 x 1920 px</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_story">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link pieza story" data-export="link_story">
+                  </div>
+                </div>
+              </td>
+              <td>Piezas con urgencia elegante: convocatoria, apertura, oportunidad o siguiente cohorte.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>No vender desde presión vacía. Mejor un tono de oportunidad concreta y timing profesional.</td>
+              <td class="naming"><div>Opportunity_Static_1x1</div><div>Opportunity_Story_9x16</div></td>
+            </tr>
+
+            <tr data-medium="LinkedIn" data-angle="Ascenso profesional y reposicionamiento">
+              <td><span class="medium-tag medium-linkedin">LinkedIn</span><br><span class="small">Message Ads / InMail</span></td>
+              <td>Consideración</td>
+              <td>MBA Online</td>
+              <td>Ascenso profesional y reposicionamiento</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Mensaje patrocinado de ascenso profesional.</td>
+              <td>
+                <div class="adapt-grid" style="grid-template-columns:1fr;min-width:220px;">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Mensaje</span>
+                    <span class="adapt-sub">Formato</span>
+                    <div>Sin banner. Definir asunto, cuerpo y CTA.</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_mensaje">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link referencia o landing" data-export="link_mensaje">
+                  </div>
+                </div>
+              </td>
+              <td>Mensaje consultivo, directo y personalizado al momento profesional del usuario.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>El peso está en la claridad del mensaje y el contexto profesional del usuario.</td>
+              <td class="naming"><div>MBA_Ascenso_Message</div></td>
+            </tr>
+
+            <tr data-medium="LinkedIn" data-angle="Liderazgo global y proyección internacional">
+              <td><span class="medium-tag medium-linkedin">LinkedIn</span><br><span class="small">Message Ads / InMail</span></td>
+              <td>Consideración</td>
+              <td>MBA + STEM</td>
+              <td>Liderazgo global y proyección internacional</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Mensaje patrocinado de visión global.</td>
+              <td>
+                <div class="adapt-grid" style="grid-template-columns:1fr;min-width:220px;">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Mensaje</span>
+                    <span class="adapt-sub">Formato</span>
+                    <div>Sin banner. Definir asunto, cuerpo y CTA.</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_mensaje">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link referencia o landing" data-export="link_mensaje">
+                  </div>
+                </div>
+              </td>
+              <td>Mensaje premium con ángulo internacional, crecimiento y visión de negocio más amplia.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>Debe sentirse uno a uno, no masivo.</td>
+              <td class="naming"><div>Global_Message</div></td>
+            </tr>
+
+            <tr data-medium="LinkedIn" data-angle="Datos, tecnología y perfil híbrido">
+              <td><span class="medium-tag medium-linkedin">LinkedIn</span><br><span class="small">Message Ads / InMail</span></td>
+              <td>Consideración</td>
+              <td>STEM</td>
+              <td>Datos, tecnología y perfil híbrido</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Mensaje patrocinado de competitividad técnica y perfil híbrido.</td>
+              <td>
+                <div class="adapt-grid" style="grid-template-columns:1fr;min-width:220px;">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Mensaje</span>
+                    <span class="adapt-sub">Formato</span>
+                    <div>Sin banner. Definir asunto, cuerpo y CTA.</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_mensaje">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link referencia o landing" data-export="link_mensaje">
+                  </div>
+                </div>
+              </td>
+              <td>Mensaje orientado a competitividad futura, desarrollo técnico-estratégico y actualización profesional.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>Hablar desde desarrollo profesional y valor futuro del perfil.</td>
+              <td class="naming"><div>STEM_Data_Message</div></td>
+            </tr>
+
+            <tr data-medium="LinkedIn" data-angle="Credibilidad, respaldo y prueba social">
+              <td><span class="medium-tag medium-linkedin">LinkedIn</span><br><span class="small">Message Ads / InMail</span></td>
+              <td>Remarketing / cierre</td>
+              <td>MBA + STEM</td>
+              <td>Credibilidad, respaldo y prueba social</td>
+              <td><span class="role-tag role-support">Soporte</span></td>
+              <td>Mensaje patrocinado de respaldo institucional.</td>
+              <td>
+                <div class="adapt-grid" style="grid-template-columns:1fr;min-width:220px;">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Mensaje</span>
+                    <span class="adapt-sub">Formato</span>
+                    <div>Sin banner. Definir asunto, cuerpo y CTA.</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_mensaje">
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link referencia o landing" data-export="link_mensaje">
+                  </div>
+                </div>
+              </td>
+              <td>Mensaje que reduzca dudas sobre seriedad académica, comunidad y respaldo institucional.</td>
+              <td><textarea class="area" placeholder="Escribe aquí el caption o lineamientos del mensaje..." data-export="caption"></textarea></td>
+              <td>Más útil cuando el usuario ya mostró interés y necesita una razón para avanzar.</td>
+              <td class="naming"><div>Brand_Credibilidad_Message</div></td>
+            </tr>
+
+            <tr data-medium="Google" data-angle="Ascenso profesional y reposicionamiento">
+              <td><span class="medium-tag medium-google">Google</span><br><span class="small">Performance Max</span></td>
+              <td>Captura de demanda latente</td>
+              <td>MBA Online</td>
+              <td>Ascenso profesional y reposicionamiento</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Asset group de ascenso profesional.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets base</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Horizontal 1200 x 628<br>Square 1200 x 1200<br>Logo 1200 x 1200</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_assets">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets opcionales</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Vertical 960 x 1200<br>Video / extras</div>
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link carpeta o assets" data-export="link_assets">
+                  </div>
+                </div>
+              </td>
+              <td>Crear asset group por ángulo, con visuales alineados a una sola narrativa. No mezclar ascenso con otros ejes.</td>
+              <td><textarea class="area" placeholder="Escribe aquí headlines, descripciones o lineamientos del asset group..." data-export="caption"></textarea></td>
+              <td>PMax aprende mejor cuando el grupo tiene coherencia semántica.</td>
+              <td class="naming"><div>MBA_Ascenso_AssetGroup</div></td>
+            </tr>
+
+            <tr data-medium="Google" data-angle="Liderazgo global y proyección internacional">
+              <td><span class="medium-tag medium-google">Google</span><br><span class="small">Performance Max</span></td>
+              <td>Captura de demanda latente</td>
+              <td>MBA Online</td>
+              <td>Liderazgo global y proyección internacional</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Asset group de liderazgo global.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets base</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Horizontal 1200 x 628<br>Square 1200 x 1200<br>Logo 1200 x 1200</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_assets">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets opcionales</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Vertical 960 x 1200<br>Video / extras</div>
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link carpeta o assets" data-export="link_assets">
+                  </div>
+                </div>
+              </td>
+              <td>Visuales premium e institucionales; considerar apoyo en video corto para ampliar inventario.</td>
+              <td><textarea class="area" placeholder="Escribe aquí headlines, descripciones o lineamientos del asset group..." data-export="caption"></textarea></td>
+              <td>Mantener consistencia entre assets y landing.</td>
+              <td class="naming"><div>MBA_Global_AssetGroup</div></td>
+            </tr>
+
+            <tr data-medium="Google" data-angle="Dominio de datos, tecnología y decisiones basadas en evidencia">
+              <td><span class="medium-tag medium-google">Google</span><br><span class="small">Performance Max</span></td>
+              <td>Captura de demanda latente</td>
+              <td>STEM</td>
+              <td>Dominio de datos, tecnología y decisiones basadas en evidencia</td>
+              <td><span class="role-tag role-core">Core</span></td>
+              <td>Asset group de data y decisiones.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets base</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Horizontal 1200 x 628<br>Square 1200 x 1200<br>Logo 1200 x 1200</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_assets">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets opcionales</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Vertical 960 x 1200<br>Video / extras</div>
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link carpeta o assets" data-export="link_assets">
+                  </div>
+                </div>
+              </td>
+              <td>Visuales de analítica, sistemas, trabajo aplicado e impacto profesional.</td>
+              <td><textarea class="area" placeholder="Escribe aquí headlines, descripciones o lineamientos del asset group..." data-export="caption"></textarea></td>
+              <td>Debe sentirse actualizado, útil y competitivo.</td>
+              <td class="naming"><div>STEM_Data_AssetGroup</div></td>
+            </tr>
+
+            <tr data-medium="Google" data-angle="Oportunidad de acceso y momento de decisión">
+              <td><span class="medium-tag medium-google">Google</span><br><span class="small">Performance Max</span></td>
+              <td>Activación táctica</td>
+              <td>STEM + MBA</td>
+              <td>Oportunidad de acceso y momento de decisión</td>
+              <td><span class="role-tag role-support">Soporte</span></td>
+              <td>Asset group de oportunidad y activación.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets base</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Horizontal 1200 x 628<br>Square 1200 x 1200<br>Logo 1200 x 1200</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_assets">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets opcionales</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Vertical 960 x 1200<br>Video / extras</div>
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link carpeta o assets" data-export="link_assets">
+                  </div>
+                </div>
+              </td>
+              <td>Assets alineados con timing, oportunidad y siguiente paso.</td>
+              <td><textarea class="area" placeholder="Escribe aquí headlines, descripciones o lineamientos del asset group..." data-export="caption"></textarea></td>
+              <td>Mejor como grupo táctico. No contaminar grupos más aspiracionales.</td>
+              <td class="naming"><div>Opportunity_AssetGroup_Action</div></td>
+            </tr>
+
+            <tr data-medium="Google" data-angle="Credibilidad, respaldo y prueba social">
+              <td><span class="medium-tag medium-google">Google</span><br><span class="small">Performance Max</span></td>
+              <td>Remarketing / validación</td>
+              <td>MBA + STEM</td>
+              <td>Credibilidad, respaldo y prueba social</td>
+              <td><span class="role-tag role-support">Soporte</span></td>
+              <td>Asset group de credibilidad y respaldo.</td>
+              <td>
+                <div class="adapt-grid">
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets base</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Horizontal 1200 x 628<br>Square 1200 x 1200<br>Logo 1200 x 1200</div>
+                    <span class="adapt-sub">Cantidad</span>
+                    <input class="qty-box" type="text" placeholder="0" data-export="cantidad_assets">
+                  </div>
+                  <div class="adapt-box">
+                    <span class="adapt-title">Assets opcionales</span>
+                    <span class="adapt-sub">Formatos</span>
+                    <div>Vertical 960 x 1200<br>Video / extras</div>
+                    <span class="adapt-sub">Link</span>
+                    <input class="field" type="text" placeholder="Link carpeta o assets" data-export="link_assets">
+                  </div>
+                </div>
+              </td>
+              <td>Visuales con comunidad, resultados, reputación, trayectoria, faculty y señales de seriedad.</td>
+              <td><textarea class="area" placeholder="Escribe aquí headlines, descripciones o lineamientos del asset group..." data-export="caption"></textarea></td>
+              <td>Buen grupo para audiencias con interés previo. Debe resolver la duda de confianza.</td>
+              <td class="naming"><div>Brand_Credibilidad_AssetGroup</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer-box">
+        <h3>Notas para producción y diligenciamiento</h3>
+        <ul>
+          <li>En Meta, cada fila representa un solo mensaje con adaptación 1:1 y story dentro de la misma línea.</li>
+          <li>Los filtros por medio y ángulo ayudan a revisar solo la parte que cada equipo necesita ver.</li>
+          <li>El botón de exportación descarga un CSV con lo diligenciado para abrirlo en Excel o subirlo a Google Sheets.</li>
+          <li>Guardar directo en Sheets sí es posible, pero requiere conectar esta interfaz a Google Apps Script o a un formulario con destino a Sheets.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">Westfield · Cuadro de materiales paid media · ADCOM</div>
+  </div>
+
+  <script>
+    const filterMedium = document.getElementById('filterMedium');
+    const filterAngle = document.getElementById('filterAngle');
+    const exportBtn = document.getElementById('exportCsvBtn');
+    const rows = Array.from(document.querySelectorAll('#materialsTable tbody tr'));
+
+    function applyFilters() {
+      const mediumValue = filterMedium.value;
+      const angleValue = filterAngle.value;
+
+      rows.forEach((row) => {
+        const rowMedium = row.dataset.medium;
+        const rowAngle = row.dataset.angle;
+        const mediumMatch = mediumValue === 'all' || rowMedium === mediumValue;
+        const angleMatch = angleValue === 'all' || rowAngle === angleValue;
+        row.classList.toggle('hidden-row', !(mediumMatch && angleMatch));
+      });
+    }
+
+    filterMedium.addEventListener('change', applyFilters);
+    filterAngle.addEventListener('change', applyFilters);
+
+    function escapeCsv(value) {
+      const safe = String(value ?? '').replace(/"/g, '""');
+      return `"${safe}"`;
+    }
+
+    function collectRowData(row) {
+      const text = (selector) => row.querySelector(selector)?.innerText?.trim() || '';
+      const inputValue = (name) => row.querySelector(`[data-export="${name}"]`)?.value?.trim() || '';
+      const naming = Array.from(row.querySelectorAll('.naming div')).map(el => el.innerText.trim()).join(' | ');
+
+      return {
+        medio: row.dataset.medium || '',
+        objetivo: row.children[1]?.innerText.trim() || '',
+        vertical: row.children[2]?.innerText.trim() || '',
+        angulo: row.dataset.angle || '',
+        rol: row.children[4]?.innerText.trim() || '',
+        mensaje_base: row.children[5]?.innerText.trim() || '',
+        cantidad_1x1: inputValue('cantidad_1x1'),
+        link_1x1: inputValue('link_1x1'),
+        cantidad_story: inputValue('cantidad_story'),
+        link_story: inputValue('link_story'),
+        cantidad_mensaje: inputValue('cantidad_mensaje'),
+        link_mensaje: inputValue('link_mensaje'),
+        cantidad_assets: inputValue('cantidad_assets'),
+        link_assets: inputValue('link_assets'),
+        caption: inputValue('caption'),
+        pedido_creativo: row.children[7]?.innerText.trim() || '',
+        recomendaciones: row.children[9]?.innerText.trim() || '',
+        nomenclatura: naming
+      };
+    }
+
+    function exportTableToCsv() {
+      const visibleRows = rows.filter(row => !row.classList.contains('hidden-row'));
+      const headers = [
+        'Medio','Objetivo','Vertical','Angulo de venta','Rol','Mensaje base',
+        'Cantidad 1:1','Link 1:1','Cantidad Story','Link Story',
+        'Cantidad Mensaje','Link Mensaje','Cantidad Assets','Link Assets',
+        'Caption / lineamientos','Que pedir al equipo creativo','Recomendaciones estrategicas','Nomenclatura sugerida'
+      ];
+
+      const lines = [headers.map(escapeCsv).join(',')];
+
+      visibleRows.forEach((row) => {
+        const data = collectRowData(row);
+        const line = [
+          data.medio,
+          data.objetivo,
+          data.vertical,
+          data.angulo,
+          data.rol,
+          data.mensaje_base,
+          data.cantidad_1x1,
+          data.link_1x1,
+          data.cantidad_story,
+          data.link_story,
+          data.cantidad_mensaje,
+          data.link_mensaje,
+          data.cantidad_assets,
+          data.link_assets,
+          data.caption,
+          data.pedido_creativo,
+          data.recomendaciones,
+          data.nomenclatura
+        ].map(escapeCsv).join(',');
+        lines.push(line);
+      });
+
+      const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'westfield_cuadro_materiales.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    exportBtn.addEventListener('click', exportTableToCsv);
+  </script>
+</body>
+</html>
