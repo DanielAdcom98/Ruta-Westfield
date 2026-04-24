@@ -523,8 +523,20 @@ h1,h2,h3,h4,h5,.bold{font-weight:700;color:var(--negro)}
 
 <!-- S10: STEM FLOW -->
 <div class="slide"><div class="slide-inner">
-<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>STEM — FLOW</h2></div></div><div class="slide-desc-col"><p class="subtext">DISTRIBUCIÓN DE INVERSIÓN</p><p class="body-text">Desglose por subcanal, medio con leads y cierres esperados. Mercado: United States.</p></div></div>
+<div class="slide-top-section"><div class="slide-title-col"><div class="slide-header"><h2>STEM — FLOW</h2></div></div><div class="slide-desc-col"><p class="subtext">DISTRIBUCIÓN DE INVERSIÓN · 3 ESCENARIOS</p><p class="body-text">Desglose por subcanal y medio para contrastar el presupuesto actual frente a los escenarios necesarios para acercarse a 28 matrículas.</p></div></div>
 <div class="content-area">
+
+<div class="mix-interactive">
+<div class="mix-tabs">
+<button class="mix-tab active" onclick="showFlow('stem12',this)"><span>Base actual</span><span class="pct">$12K</span></button>
+<button class="mix-tab" onclick="showFlow('stem35',this)"><span>Optimizado</span><span class="pct">$35K</span></button>
+<button class="mix-tab" onclick="showFlow('stem140',this)"><span>Escala actual</span><span class="pct">$140K</span></button>
+</div>
+<div class="mix-panel-container" style="padding:16px">
+
+<!-- Escenario $12K -->
+<div class="mix-panel active" id="panel-stem12">
+<span class="panel-header-badge">Escenario base · $12,000 USD → 167 leads → 2.5 matrículas</span>
 <table class="budget-table">
 <thead><tr><th>Origen</th><th>Medio</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th><th>Conv. %</th></tr></thead>
 <tbody>
@@ -539,15 +551,72 @@ h1,h2,h3,h4,h5,.bold{font-weight:700;color:var(--negro)}
 </tbody>
 <tfoot><tr><td colspan="2">TOTAL STEM</td><td>$12,000</td><td></td><td>167</td><td>2.51</td><td></td></tr></tfoot>
 </table>
-
 <div class="stats-grid col3" style="margin-top:18px">
-<div class="stat-card"><span class="stat-val">$5,600</span><span class="stat-label">LinkedIn (47%)</span><span class="stat-sub">93 leads · CPL $60</span></div>
-<div class="stat-card"><span class="stat-val">$3,900</span><span class="stat-label">Meta (32%)</span><span class="stat-sub">57 leads · CPL $68</span></div>
-<div class="stat-card"><span class="stat-val">$2,500</span><span class="stat-label">Google (21%)</span><span class="stat-sub">17 leads · CPL $150</span></div>
+<div class="stat-card"><span class="stat-val">$5.6K</span><span class="stat-label">LinkedIn (47%)</span><span class="stat-sub">93 leads · CPL $60</span></div>
+<div class="stat-card"><span class="stat-val">$3.9K</span><span class="stat-label">Meta (32%)</span><span class="stat-sub">57 leads · CPL $68</span></div>
+<div class="stat-card"><span class="stat-val">$2.5K</span><span class="stat-label">Google (21%)</span><span class="stat-sub">17 leads · CPL $150</span></div>
+</div>
+<div class="claim-box"><p><strong>Lectura:</strong> este escenario mantiene el punto de partida actual. Permite sostener presencia, pero no cierra la brecha frente a la meta de 28 matrículas.</p></div>
 </div>
 
-<div class="claim-box"><p><strong>Sunshine Scholarships concentra 65% del presupuesto ($7,800)</strong> con el mix más diverso (Google + LinkedIn + Meta). Info Sessions y Miami operan como captación de eventos.</p></div>
+<!-- Escenario $35K optimizado -->
+<div class="mix-panel" id="panel-stem35">
+<span class="panel-header-badge">Escenario optimizado · $35,000 USD → ~700 leads → 28 matrículas</span>
+<table class="budget-table">
+<thead><tr><th>Origen</th><th>Medio</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th><th>Conv. %</th></tr></thead>
+<tbody>
+<tr><td>Programas STEM - Landing</td><td>META</td><td>$5,000</td><td>$50</td><td>100</td><td>4.00</td><td>4.0%</td></tr>
+<tr><td>Programas STEM - Instant Forms</td><td>META</td><td>$4,000</td><td>$40</td><td>100</td><td>4.00</td><td>4.0%</td></tr>
+<tr><td>Info Sessions</td><td>LINKEDIN</td><td>$2,000</td><td>$40</td><td>50</td><td>2.00</td><td>4.0%</td></tr>
+<tr><td>Info Sessions</td><td>META</td><td>$1,500</td><td>$30</td><td>50</td><td>2.00</td><td>4.0%</td></tr>
+<tr><td>Miami: Leading with Intelligence</td><td>LINKEDIN</td><td>$4,000</td><td>$50</td><td>80</td><td>3.20</td><td>4.0%</td></tr>
+<tr><td>Miami: Video IA + Instant Forms</td><td>TIKTOK</td><td>$3,500</td><td>$35</td><td>100</td><td>4.00</td><td>4.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>GOOGLE</td><td>$5,000</td><td>$70</td><td>71</td><td>2.86</td><td>4.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>LINKEDIN</td><td>$7,000</td><td>$70</td><td>100</td><td>4.00</td><td>4.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>META</td><td>$3,000</td><td>$60</td><td>50</td><td>2.00</td><td>4.0%</td></tr>
+</tbody>
+<tfoot><tr><td colspan="2">TOTAL STEM OPTIMIZADO</td><td>$35,000</td><td></td><td>~701</td><td>~28.06</td><td>4.0%</td></tr></tfoot>
+</table>
+<div class="stats-grid" style="margin-top:18px">
+<div class="stat-card"><span class="stat-val">$13K</span><span class="stat-label">LinkedIn (37%)</span><span class="stat-sub">230 leads · CPL ~$57</span></div>
+<div class="stat-card"><span class="stat-val">$13.5K</span><span class="stat-label">Meta (39%)</span><span class="stat-sub">300 leads · CPL $45</span></div>
+<div class="stat-card"><span class="stat-val">$5K</span><span class="stat-label">Google (14%)</span><span class="stat-sub">71 leads · CPL $70</span></div>
+<div class="stat-card"><span class="stat-val">$3.5K</span><span class="stat-label">TikTok (10%)</span><span class="stat-sub">100 leads · CPL $35</span></div>
+</div>
+<div class="claim-box"><p><strong>Lectura:</strong> este escenario requiere doble mejora: bajar el CPL promedio hacia ~$50 y duplicar la conversión lead → matrícula al 4%. Para lograrlo, depende de optimización de pauta, <strong>Instant Forms en Meta/TikTok, 3 videos con IA</strong> y mayor intensidad comercial.</p></div>
+</div>
+
+<!-- Escenario $140K condición actual -->
+<div class="mix-panel" id="panel-stem140">
+<span class="panel-header-badge">Escenario de escala con condiciones actuales · $140,000 USD → ~1,400 leads → 28 matrículas</span>
+<table class="budget-table">
+<thead><tr><th>Origen</th><th>Medio</th><th>Ppto</th><th>CPL</th><th>Leads</th><th>Cierres</th><th>Conv. %</th></tr></thead>
+<tbody>
+<tr><td>Programas STEM - Pauta Meta</td><td>META</td><td>$17,000</td><td>$90</td><td>189</td><td>3.78</td><td>2.0%</td></tr>
+<tr><td>Info Sessions</td><td>LINKEDIN</td><td>$6,000</td><td>$80</td><td>75</td><td>1.50</td><td>2.0%</td></tr>
+<tr><td>Info Sessions</td><td>META</td><td>$4,000</td><td>$70</td><td>57</td><td>1.14</td><td>2.0%</td></tr>
+<tr><td>Miami: Leading with Intelligence</td><td>LINKEDIN</td><td>$14,000</td><td>$100</td><td>140</td><td>2.80</td><td>2.0%</td></tr>
+<tr><td>Miami: Leading with Intelligence</td><td>META</td><td>$8,000</td><td>$90</td><td>89</td><td>1.78</td><td>2.0%</td></tr>
+<tr><td>Miami: Video IA + Instant Forms</td><td>TIKTOK</td><td>$7,000</td><td>$70</td><td>100</td><td>2.00</td><td>2.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>GOOGLE</td><td>$21,000</td><td>$110</td><td>191</td><td>3.82</td><td>2.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>LINKEDIN</td><td>$43,000</td><td>$120</td><td>358</td><td>7.17</td><td>2.0%</td></tr>
+<tr><td>Sunshine Scholarships</td><td>META</td><td>$20,000</td><td>$100</td><td>200</td><td>4.00</td><td>2.0%</td></tr>
+</tbody>
+<tfoot><tr><td colspan="2">TOTAL STEM ESCALA ACTUAL</td><td>$140,000</td><td></td><td>~1,399</td><td>~28.0</td><td>2.0%</td></tr></tfoot>
+</table>
+<div class="stats-grid" style="margin-top:18px">
+<div class="stat-card"><span class="stat-val">$63K</span><span class="stat-label">LinkedIn (45%)</span><span class="stat-sub">573 leads · CPL ~$110</span></div>
+<div class="stat-card"><span class="stat-val">$49K</span><span class="stat-label">Meta (35%)</span><span class="stat-sub">535 leads · CPL ~$92</span></div>
+<div class="stat-card"><span class="stat-val">$21K</span><span class="stat-label">Google (15%)</span><span class="stat-sub">191 leads · CPL $110</span></div>
+<div class="stat-card"><span class="stat-val">$7K</span><span class="stat-label">TikTok (5%)</span><span class="stat-sub">100 leads · CPL $70</span></div>
+</div>
+<div class="claim-box"><p><strong>Lectura:</strong> si se mantienen las condiciones actuales de mercado y una conversión cercana al 2%, alcanzar 28 matrículas exige escalar la inversión hasta ~$140K. Este escenario resuelve volumen por presupuesto, no por eficiencia.</p></div>
+</div>
+
+</div></div>
+
 </div></div></div>
+
 
 <!-- S11: STEM VOLUMEN -->
 <div class="slide"><div class="slide-inner">
