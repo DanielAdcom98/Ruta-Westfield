@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Westfield · Informe LinkedIn Leads</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--negro);
+      background: var(--gris-claro);
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--negro);
+      color: white;
+      padding: 32px 40px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: var(--amarillo);
+    }
+    .header-tag {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--amarillo);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    header h1 { margin: 0 0 8px; font-size: 2rem; font-weight: 700; letter-spacing: -.4px; line-height: 1.1; }
+    header p  { margin: 0; color: rgba(255,255,255,.78); max-width: 980px; font-weight: 300; font-style: italic; font-size: .92rem; }
+
+    /* ── Sticky nav ── */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--negro);
+      border-bottom: 3px solid var(--amarillo);
+      display: flex;
+      padding: 0 34px;
+      overflow-x: auto;
+    }
+    .nav-tab {
+      color: rgba(255,255,255,.55);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 11px 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      white-space: nowrap;
+      transition: color .15s;
+    }
+    .nav-tab:hover { color: rgba(255,255,255,.9); }
+    .nav-tab.active { color: var(--amarillo); border-bottom-color: var(--amarillo); }
+
+    /* ── Layout ── */
+    main { padding: 28px 40px 56px; max-width: 1380px; margin: auto; }
+    section { margin: 0 0 28px; scroll-margin-top: 48px; }
+    h2 { font-size: 1rem; margin: 0 0 14px; font-weight: 700; text-transform: uppercase; letter-spacing: -.1px; }
+    .grid { display: grid; gap: 16px; }
+    .cards { grid-template-columns: repeat(5, minmax(150px, 1fr)); }
+    .two   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card {
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.03);
+    }
+    .metric .value { font-size: 2rem; font-weight: 700; margin-bottom: 4px; color: var(--negro); line-height: 1.15; }
+    .metric .label { color: var(--gris-medio); font-size: .75rem; font-weight: 300; }
+    .note      { background: #fff7ed; border-color: #fed7aa; }
+    .ok        { background: #eef8f0; border-color: #bfe5c4; }
+    .highlight { background: #eef7ff; border-color: #bfdbfe; }
+
+    /* ── Bars (animated) ── */
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(140px, 1.2fr) minmax(120px, 2fr) 88px;
+      gap: 10px;
+      align-items: center;
+      margin: 9px 0;
+      font-size: .76rem;
+    }
+    .bar-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--gris-oscuro); }
+    .bar-track { background: var(--gris-borde); height: 9px; border-radius: 999px; overflow: hidden; }
+    .bar-track span {
+      display: block;
+      height: 100%;
+      background: var(--amarillo);
+      border-radius: 999px;
+      width: 0;
+      transition: width .9s cubic-bezier(.4,0,.2,1);
+    }
+    .bar-value { text-align: right; font-weight: 700; font-size: .76rem; }
+    .bar-value small { color: var(--gris-medio); font-weight: 300; }
+
+    /* ── Section divider ── */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 36px 0 18px;
+    }
+    .section-title .bar-label-deco { background: var(--amarillo); padding: 7px 20px; border-radius: 6px; }
+    .section-title h3 { margin: 0; font-size: .95rem; font-weight: 700; text-transform: uppercase; color: var(--negro); }
+    .section-title .line { flex: 1; height: 1px; background: var(--gris-borde); }
+
+    /* ── Tables ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: var(--radius);
+      overflow: hidden;
+      font-size: .76rem;
+    }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--gris-borde); text-align: left; vertical-align: middle; }
+    th {
+      background: var(--negro);
+      color: var(--amarillo);
+      font-weight: 700;
+      font-size: .7rem;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    th[data-sort] { cursor: pointer; user-select: none; }
+    th[data-sort]:hover { background: #1f1f1f; }
+    th[data-sort]::after { content: ' ↕'; opacity: .35; font-size: .6rem; }
+    th[data-sort].asc::after  { content: ' ↑'; opacity: 1; }
+    th[data-sort].desc::after { content: ' ↓'; opacity: 1; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) td { background: var(--gris-claro); }
+    tbody tr { transition: background .12s; }
+    tbody tr:hover td { background: #fffde7; }
+
+    /* ── Quality inline bar ── */
+    .q-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .q-track { flex: 1; min-width: 60px; background: var(--gris-borde); height: 6px; border-radius: 999px; overflow: hidden; }
+    .q-fill {
+      height: 100%;
+      border-radius: 999px;
+      width: 0;
+      transition: width .9s cubic-bezier(.4,0,.2,1);
+    }
+    .q-fill.high { background: #22c55e; }
+    .q-fill.mid  { background: #f59e0b; }
+    .q-fill.low  { background: #ef4444; }
+
+    /* ── Cargo pills ── */
+    .cargo-pill {
+      display: inline-block;
+      background: var(--gris-claro);
+      border: 1px solid var(--gris-borde);
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: .69rem;
+      margin: 2px 3px 2px 0;
+      vertical-align: middle;
+    }
+    .cargo-pill.hidden { display: none; }
+    .cargo-toggle {
+      display: inline-block;
+      background: var(--negro);
+      color: var(--amarillo);
+      border: none;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: .69rem;
+      font-weight: 700;
+      cursor: pointer;
+      vertical-align: middle;
+      font-family: 'Poppins', sans-serif;
+      transition: opacity .15s;
+    }
+    .cargo-toggle:hover { opacity: .8; }
+
+    /* ── Insights ── */
+    .insights { padding-left: 18px; }
+    .insights li { margin: 9px 0; font-size: .84rem; font-weight: 300; line-height: 1.55; }
+    .insights li strong { font-weight: 700; color: var(--negro); }
+    .small { color: var(--gris-medio); font-size: .72rem; font-weight: 300; }
+
+    /* ── Responsive ── */
+    @media (max-width: 980px) {
+      main, header { padding-left: 18px; padding-right: 18px; }
+      .sticky-nav { padding: 0 18px; }
+      .cards, .two, .three { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; gap: 4px; }
+      .bar-value { text-align: left; }
+      header h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<a class="hub-back" href="../index.html">← Hub</a>
+
+<header>
+  <div class="header-tag">LinkedIn Leads · Summer 2026</div>
+  <h1>Informe general de perfiles</h1>
+  <p>Lectura agregada del archivo unificado de leads. El foco está en la calidad profesional de la audiencia: cargos, seniority, función, empresa, industria, país, formación e intención declarada.</p>
+</header>
+
+<nav class="sticky-nav" id="stickyNav">
+  <a class="nav-tab active" href="#resumen"    data-target="resumen">Resumen</a>
+  <a class="nav-tab"        href="#audiencia"  data-target="audiencia">Audiencia</a>
+  <a class="nav-tab"        href="#estrategia" data-target="estrategia">Estrategia</a>
+  <a class="nav-tab"        href="#datos"      data-target="datos">Datos</a>
+  <a class="nav-tab"        href="#recomendaciones" data-target="recomendaciones">Recomendaciones</a>
+</nav>
+
+<main>
+
+  <!-- ── RESUMEN ────────────────────────────────────────────────────────── -->
+  <section id="resumen">
+    <div class="grid cards" style="margin-bottom:16px">
+      <div class="card metric">
+        <div class="value">409</div>
+        <div class="label">Leads analizados</div>
+      </div>
+      <div class="card metric">
+        <div class="value">408</div>
+        <div class="label">Emails únicos</div>
+      </div>
+      <div class="card metric">
+        <div class="value">202</div>
+        <div class="label">Perfiles gerenciales / directivos</div>
+      </div>
+      <div class="card metric">
+        <div class="value">144</div>
+        <div class="label">Empresas declaradas o inferidas</div>
+      </div>
+      <div class="card metric">
+        <div class="value" style="font-size:1.2rem;line-height:1.4">2026-02-27<br><span style="font-size:.88rem;color:var(--gris-medio)">a 2026-05-19</span></div>
+        <div class="label">Rango de fechas</div>
+      </div>
+    </div>
+
+    <div class="grid two">
+      <div class="card highlight">
+        <h2>Hallazgo principal</h2>
+        <ul class="insights">
+          <li>La base tiene una composición profesional fuerte: <strong>202</strong> leads están en gerencia, dirección, VP, C-Level o presidencia.</li>
+          <li>Al ampliar a coordinación, supervisión y especialistas, hay <strong>293</strong> perfiles con señales claras de trayectoria profesional.</li>
+          <li>El campo Cargo es especialmente sólido: <strong>99.5%</strong> de completitud, suficiente para segmentar mensajes y priorizar seguimiento.</li>
+        </ul>
+      </div>
+      <div class="card ok">
+        <h2>Lectura ejecutiva</h2>
+        <ul class="insights">
+          <li>La información permite construir audiencias por madurez profesional, no solo por país o campaña.</li>
+          <li>Empresa e industria aportan una capa adicional: <strong>119</strong> leads tienen empresa declarada y <strong>134</strong> tienen industria.</li>
+          <li>El mejor corte comercial combina cargo + país + nivel educativo + presupuesto para priorizar contactos con mayor afinidad.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AUDIENCIA ──────────────────────────────────────────────────────── -->
+  <div class="section-title"><div class="bar-label-deco"><h3>Audiencia</h3></div><div class="line"></div></div>
+
+  <section id="audiencia">
+    <div class="grid three" style="margin-bottom:16px">
+
+      <div class="card">
+        <h2>Canal</h2>
+        <div class="bar-row"><div class="bar-label">B2C</div><div class="bar-track"><span data-w="70.2%"></span></div><div class="bar-value">287 <small>70.2%</small></div></div>
+        <div class="bar-row"><div class="bar-label">B2B</div><div class="bar-track"><span data-w="29.1%"></span></div><div class="bar-value">119 <small>29.1%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Sin dato</div><div class="bar-track"><span data-w="0.7%"></span></div><div class="bar-value">3 <small>0.7%</small></div></div>
+      </div>
+
+      <div class="card">
+        <h2>Seniority por cargo</h2>
+        <div class="bar-row"><div class="bar-label">Gerencia / Head</div><div class="bar-track"><span data-w="30.1%"></span></div><div class="bar-value">123 <small>30.1%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Otros perfiles</div><div class="bar-track"><span data-w="17.6%"></span></div><div class="bar-value">72 <small>17.6%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Coordinación / Supervisión</div><div class="bar-track"><span data-w="12.0%"></span></div><div class="bar-value">49 <small>12.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Especialista / Profesional</div><div class="bar-track"><span data-w="10.3%"></span></div><div class="bar-value">42 <small>10.3%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Dirección / VP</div><div class="bar-track"><span data-w="10.0%"></span></div><div class="bar-value">41 <small>10.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Analista / Asistente</div><div class="bar-track"><span data-w="9.5%"></span></div><div class="bar-value">39 <small>9.5%</small></div></div>
+        <div class="bar-row"><div class="bar-label">C-Level / Presidencia</div><div class="bar-track"><span data-w="9.3%"></span></div><div class="bar-value">38 <small>9.3%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Estudiante / Junior</div><div class="bar-track"><span data-w="0.7%"></span></div><div class="bar-value">3 <small>0.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Sin dato</div><div class="bar-track"><span data-w="0.5%"></span></div><div class="bar-value">2 <small>0.5%</small></div></div>
+      </div>
+
+      <div class="card">
+        <h2>Afinidad estimada MBA</h2>
+        <div class="bar-row"><div class="bar-label">Afinidad media</div><div class="bar-track"><span data-w="66.3%"></span></div><div class="bar-value">271 <small>66.3%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Afinidad exploratoria</div><div class="bar-track"><span data-w="28.9%"></span></div><div class="bar-value">118 <small>28.9%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Alta afinidad MBA</div><div class="bar-track"><span data-w="4.9%"></span></div><div class="bar-value">20 <small>4.9%</small></div></div>
+      </div>
+    </div>
+
+    <div class="grid three">
+      <div class="card">
+        <h2>Función profesional</h2>
+        <div class="bar-row"><div class="bar-label">Otra función / N/C</div><div class="bar-track"><span data-w="57.0%"></span></div><div class="bar-value">233 <small>57.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Comercial / Marketing</div><div class="bar-track"><span data-w="13.2%"></span></div><div class="bar-value">54 <small>13.2%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Operaciones / Logística</div><div class="bar-track"><span data-w="10.3%"></span></div><div class="bar-value">42 <small>10.3%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Dirección Gral / Estrategia</div><div class="bar-track"><span data-w="8.1%"></span></div><div class="bar-value">33 <small>8.1%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Tecnología / Datos</div><div class="bar-track"><span data-w="4.2%"></span></div><div class="bar-value">17 <small>4.2%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Finanzas / Administración</div><div class="bar-track"><span data-w="3.2%"></span></div><div class="bar-value">13 <small>3.2%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Talento Humano</div><div class="bar-track"><span data-w="2.4%"></span></div><div class="bar-value">10 <small>2.4%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Legal / Compliance</div><div class="bar-track"><span data-w="0.5%"></span></div><div class="bar-value">2 <small>0.5%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Educación / Investigación</div><div class="bar-track"><span data-w="0.5%"></span></div><div class="bar-value">2 <small>0.5%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Salud</div><div class="bar-track"><span data-w="0.2%"></span></div><div class="bar-value">1 <small>0.2%</small></div></div>
+      </div>
+
+      <div class="card">
+        <h2>Países</h2>
+        <div class="bar-row"><div class="bar-label">México</div><div class="bar-track"><span data-w="37.9%"></span></div><div class="bar-value">155 <small>37.9%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Perú</div><div class="bar-track"><span data-w="31.5%"></span></div><div class="bar-value">129 <small>31.5%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Colombia</div><div class="bar-track"><span data-w="21.8%"></span></div><div class="bar-value">89 <small>21.8%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Estados Unidos</div><div class="bar-track"><span data-w="8.6%"></span></div><div class="bar-value">35 <small>8.6%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Islandia</div><div class="bar-track"><span data-w="0.2%"></span></div><div class="bar-value">1 <small>0.2%</small></div></div>
+      </div>
+
+      <div class="card">
+        <h2>Educación</h2>
+        <div class="bar-row"><div class="bar-label">Universitario</div><div class="bar-track"><span data-w="35.9%"></span></div><div class="bar-value">147 <small>35.9%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Sin dato</div><div class="bar-track"><span data-w="34.0%"></span></div><div class="bar-value">139 <small>34.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Especialización</div><div class="bar-track"><span data-w="14.7%"></span></div><div class="bar-value">60 <small>14.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Maestría</div><div class="bar-track"><span data-w="13.4%"></span></div><div class="bar-value">55 <small>13.4%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Doctorado</div><div class="bar-track"><span data-w="2.0%"></span></div><div class="bar-value">8 <small>2.0%</small></div></div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card">
+        <h2>Empresa: dato declarado e inferido</h2>
+        <div class="bar-row"><div class="bar-label">Sin empresa</div><div class="bar-track"><span data-w="64.8%"></span></div><div class="bar-value">265 <small>64.8%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Declarada</div><div class="bar-track"><span data-w="29.1%"></span></div><div class="bar-value">119 <small>29.1%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Inferida (email corp.)</div><div class="bar-track"><span data-w="6.1%"></span></div><div class="bar-value">25 <small>6.1%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Email personal</div><div class="bar-track"><span data-w="90.0%"></span></div><div class="bar-value">368 <small>90.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Email corporativo</div><div class="bar-track"><span data-w="10.0%"></span></div><div class="bar-value">41 <small>10.0%</small></div></div>
+      </div>
+
+      <div class="card">
+        <h2>Industrias con mayor presencia</h2>
+        <div class="bar-row"><div class="bar-label">Consultoría y servicios a empresas</div><div class="bar-track"><span data-w="2.7%"></span></div><div class="bar-value">11 <small>2.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Desarrollo de software</div><div class="bar-track"><span data-w="2.0%"></span></div><div class="bar-value">8 <small>2.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Servicios de publicidad</div><div class="bar-track"><span data-w="1.7%"></span></div><div class="bar-value">7 <small>1.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Servicios financieros</div><div class="bar-track"><span data-w="1.7%"></span></div><div class="bar-value">7 <small>1.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Servicios de RRHH</div><div class="bar-track"><span data-w="1.5%"></span></div><div class="bar-value">6 <small>1.5%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Consultoría de TI</div><div class="bar-track"><span data-w="1.5%"></span></div><div class="bar-value">6 <small>1.5%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Administración pública</div><div class="bar-track"><span data-w="1.2%"></span></div><div class="bar-value">5 <small>1.2%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Construcción</div><div class="bar-track"><span data-w="1.2%"></span></div><div class="bar-value">5 <small>1.2%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Organizaciones sin ánimo de lucro</div><div class="bar-track"><span data-w="1.0%"></span></div><div class="bar-value">4 <small>1.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Fabricación de vehículos</div><div class="bar-track"><span data-w="1.0%"></span></div><div class="bar-value">4 <small>1.0%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Fabricación farmacéutica</div><div class="bar-track"><span data-w="0.7%"></span></div><div class="bar-value">3 <small>0.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Producción multimedia</div><div class="bar-track"><span data-w="0.7%"></span></div><div class="bar-value">3 <small>0.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Tecnología / Medios</div><div class="bar-track"><span data-w="0.7%"></span></div><div class="bar-value">3 <small>0.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">Transporte en camión</div><div class="bar-track"><span data-w="0.7%"></span></div><div class="bar-value">3 <small>0.7%</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ESTRATEGIA ─────────────────────────────────────────────────────── -->
+  <div class="section-title"><div class="bar-label-deco"><h3>Estrategia</h3></div><div class="line"></div></div>
+
+  <section id="estrategia">
+    <h2>Matriz estratégica de audiencia</h2>
+    <table style="margin-bottom:20px">
+      <thead>
+        <tr>
+          <th data-sort>Segmento</th>
+          <th data-sort>Leads</th>
+          <th data-sort>%</th>
+          <th>Motivador principal</th>
+          <th>Uso recomendado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Alta dirección y C-Level</strong></td>
+          <td>202</td><td>49.4%</td>
+          <td>Liderazgo, visión estratégica, red ejecutiva, transformación de negocio.</td>
+          <td>Prioridad alta para asesoría consultiva y mensajes de valor ejecutivo.</td>
+        </tr>
+        <tr>
+          <td><strong>Gerencias, coordinación y especialistas</strong></td>
+          <td>91</td><td>22.2%</td>
+          <td>Ascenso, movilidad profesional, toma de decisiones, mejores oportunidades.</td>
+          <td>Prioridad media-alta; nutrir con argumentos de ROI profesional.</td>
+        </tr>
+        <tr>
+          <td><strong>Analistas / asistentes</strong></td>
+          <td>39</td><td>9.5%</td>
+          <td>Crecimiento, empleabilidad, transición hacia roles de liderazgo.</td>
+          <td>Útiles para remarketing y seguimiento educativo.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Estrategia de mensaje por cargo</h2>
+    <table style="margin-bottom:20px">
+      <thead>
+        <tr>
+          <th data-sort>Perfil</th>
+          <th>Ángulo recomendado</th>
+          <th>Argumentos a reforzar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Gerencia / Head</td><td>El MBA como acelerador de liderazgo y criterio directivo.</td><td>Casos de crecimiento, red internacional, visión integral de negocio.</td></tr>
+        <tr><td>Dirección / VP / C-Level</td><td>El MBA como conversación de estrategia, competitividad y transformación.</td><td>Prestigio, networking ejecutivo, impacto organizacional.</td></tr>
+        <tr><td>Coordinación / Supervisión</td><td>El MBA como puente hacia cargos de mayor responsabilidad.</td><td>Compatibilidad con trabajo, habilidades directivas aplicables, ascenso.</td></tr>
+        <tr><td>Especialistas / Profesionales</td><td>El MBA como ampliación de perfil técnico hacia gestión.</td><td>De experto funcional a líder de negocio.</td></tr>
+        <tr><td>Analistas / Asistentes</td><td>El MBA como ruta de movilidad profesional.</td><td>Orientación, financiación, plan de carrera y acompañamiento.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Lectura por mercado</h2>
+    <table>
+      <thead>
+        <tr>
+          <th data-sort>Mercado</th>
+          <th data-sort>Leads</th>
+          <th data-sort>%</th>
+          <th>Lectura estratégica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>México</td><td>155</td><td>37.9%</td><td>Mercado con mayor volumen total. Conviene separar mensajes B2B/evento de mensajes B2C de MBA para no mezclar intención.</td></tr>
+        <tr><td>Perú</td><td>129</td><td>31.5%</td><td>Muy fuerte en volumen B2C. Buen mercado para mensajes de avance profesional, financiamiento y compatibilidad laboral.</td></tr>
+        <tr><td>Colombia</td><td>89</td><td>21.8%</td><td>Buen balance entre volumen y cercanía regional. Recomendable reforzar autoridad institucional y networking.</td></tr>
+        <tr><td>Estados Unidos</td><td>35</td><td>8.6%</td><td>Menor volumen, pero con perfiles potencialmente valiosos por capacidad de pago y exposición internacional.</td></tr>
+        <tr><td>Islandia</td><td>1</td><td>0.2%</td><td>Mercado de seguimiento puntual.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── DATOS ──────────────────────────────────────────────────────────── -->
+  <div class="section-title"><div class="bar-label-deco"><h3>Datos</h3></div><div class="line"></div></div>
+
+  <section id="datos">
+    <h2>Calidad de datos de leads</h2>
+    <table style="margin-bottom:20px">
+      <thead>
+        <tr>
+          <th data-sort>Campo</th>
+          <th data-sort>Con dato</th>
+          <th>% completitud</th>
+          <th data-sort>Faltantes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Cargo</td><td>407</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill high" data-w="99.5%"></div></div><span>99.5%</span></div></td><td>2</td></tr>
+        <tr><td>Titulación</td><td>407</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill high" data-w="99.5%"></div></div><span>99.5%</span></div></td><td>2</td></tr>
+        <tr><td>Ciudad</td><td>408</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill high" data-w="99.8%"></div></div><span>99.8%</span></div></td><td>1</td></tr>
+        <tr><td>Bachelor</td><td>287</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill high" data-w="70.2%"></div></div><span>70.2%</span></div></td><td>122</td></tr>
+        <tr><td>País</td><td>288</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill high" data-w="70.4%"></div></div><span>70.4%</span></div></td><td>121</td></tr>
+        <tr><td>Nivel de estudio</td><td>270</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill mid" data-w="66.0%"></div></div><span>66.0%</span></div></td><td>139</td></tr>
+        <tr><td>Presupuesto</td><td>255</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill mid" data-w="62.3%"></div></div><span>62.3%</span></div></td><td>154</td></tr>
+        <tr><td>Industria</td><td>134</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill low" data-w="32.8%"></div></div><span>32.8%</span></div></td><td>275</td></tr>
+        <tr><td>Empresa</td><td>119</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill low" data-w="29.1%"></div></div><span>29.1%</span></div></td><td>290</td></tr>
+        <tr><td>Campo de estudio</td><td>15</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill low" data-w="3.7%"></div></div><span>3.7%</span></div></td><td>394</td></tr>
+        <tr><td>Experiencia laboral</td><td>2</td><td><div class="q-bar-wrap"><div class="q-track"><div class="q-fill low" data-w="0.5%"></div></div><span>0.5%</span></div></td><td>407</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Cargos frecuentes por seniority</h2>
+    <p class="small" style="margin:-6px 0 12px">Haz clic en una fila para ver todos los cargos del segmento.</p>
+    <table>
+      <thead><tr><th data-sort>Segmento</th><th>Cargos frecuentes</th></tr></thead>
+      <tbody>
+        <tr><td>Gerencia / Head</td><td class="cargo-cell">Gerente general (5), Gerente (4), Key Account Manager (2), General Manager (2), Gerente General (2), Sr Sales Lead Inside LATAM Hub (1), Key Account Manager Shell (1), Plant Operations Manager (1)</td></tr>
+        <tr><td>C-Level / Presidencia</td><td class="cargo-cell">Presidente (3), CEO (2), Propietario (2), Socio fundador (2), HR Business Partner (2), Executive Vice President &amp; Co-Founder | COO - CCO - CSO SDS (1), Principal CEO (1), Socio (1)</td></tr>
+        <tr><td>Dirección / VP</td><td class="cargo-cell">Director (3), Director de operaciones (3), Directora (2), Director franchise support (1), Social Media Director (1), Directora Comercial (1), Directora ejecutiva (1), Directora de talento humano y administrativa (1)</td></tr>
+        <tr><td>Coordinación / Supervisión</td><td class="cargo-cell">Supervisor (5), Supervisor de operaciones (5), Supervisor de obra (2), Supervisor de producción (2), Cleaning Supervisor (1), Supervisor de operaciones y mantenimiento (1), Supervisora (1), Coordinadora de inteligencia de datos (1)</td></tr>
+        <tr><td>Especialista / Profesional</td><td class="cargo-cell">Digital Media Planner (2), Ing. Senior de Geomecánica (2), Profesor (2), Consultor de empresas (1), Asesora de ventas (1), Mechanical Engineer (1), Asesor de gerencia (1), Sales Consultant (1)</td></tr>
+        <tr><td>Analista / Asistente</td><td class="cargo-cell">Asistente contable (1), Asistente Administrativo de Mantenimiento (1), Certified Nursing Assistant (1), Representante legal y dueño (1), Agente de atención al cliente (1), Representante comercial y técnico (1), Analista de bodega de importaciones (1), Analista de selección y contratación (1)</td></tr>
+        <tr><td>Otros perfiles profesionales</td><td class="cargo-cell">A cargo (2), Entrenador de fútbol (1), Content Moderator (1), Centro de atención telefónica (1), Médico auditor (1), Tecnóloga en imágenes diagnósticas (1), IT administrative (1), Promotor de reinserción social (1)</td></tr>
+        <tr><td>Estudiante / Junior</td><td class="cargo-cell">Practicante (1), Practicante (1), Desarrollador junior de IFS (1)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── RECOMENDACIONES ────────────────────────────────────────────────── -->
+  <div class="section-title"><div class="bar-label-deco"><h3>Recomendaciones</h3></div><div class="line"></div></div>
+
+  <section id="recomendaciones" class="card">
+    <h2>Recomendaciones accionables</h2>
+    <ul class="insights">
+      <li>Destacar el valor del MBA para perfiles gerenciales/directivos: liderazgo, visión estratégica, networking ejecutivo y crecimiento regional.</li>
+      <li>Para coordinadores, supervisores y especialistas, enfocar el mensaje en movilidad profesional, ascenso y compatibilidad con la vida laboral.</li>
+      <li>Usar <strong>Cargo</strong> como campo clave de scoring: seniority alto + formación universitaria + presupuesto informado + empresa/industria debe pasar a prioridad comercial alta.</li>
+      <li>Conservar Empresa e Industria como variables de priorización: ayudan a identificar leads corporativos, sectores atractivos y oportunidades de alianzas.</li>
+      <li>Construir una ruta de seguimiento por nivel profesional: asesoría consultiva para directivos, nutrición de valor para mandos medios y orientación de plan de carrera para perfiles operativos.</li>
+      <li>Usar la lectura de país para adaptar la promesa: financiamiento y flexibilidad en mercados de alto volumen, autoridad institucional y red internacional en mercados de mayor ticket potencial.</li>
+    </ul>
+    <p class="small" style="margin-top:14px">Archivo fuente: leads_unificados.csv · Rango: 2026-02-27 a 2026-05-19</p>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  /* ── 1. Animate bars ────────────────────────────────────────────────── */
+  function animateBars() {
+    document.querySelectorAll('.bar-track span[data-w]').forEach(function (s) {
+      s.style.width = s.dataset.w;
+    });
+    document.querySelectorAll('.q-fill[data-w]').forEach(function (s) {
+      s.style.width = s.dataset.w;
+    });
+  }
+
+  /* ── 2. Sticky nav active tab on scroll ─────────────────────────────── */
+  var navTabs = document.querySelectorAll('.nav-tab');
+  var sectionIds = ['resumen', 'audiencia', 'estrategia', 'datos', 'recomendaciones'];
+
+  function updateNav() {
+    var current = sectionIds[0];
+    sectionIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 80) current = id;
+    });
+    navTabs.forEach(function (t) {
+      t.classList.toggle('active', t.dataset.target === current);
+    });
+  }
+
+  /* ── 3. Sortable tables ─────────────────────────────────────────────── */
+  function initSort() {
+    document.querySelectorAll('th[data-sort]').forEach(function (th) {
+      th.addEventListener('click', function () {
+        var table = th.closest('table');
+        var col = Array.from(th.parentElement.children).indexOf(th);
+        var asc = !th.classList.contains('asc');
+        table.querySelectorAll('th').forEach(function (t) { t.classList.remove('asc', 'desc'); });
+        th.classList.add(asc ? 'asc' : 'desc');
+        var rows = Array.from(table.querySelectorAll('tbody tr'));
+        rows.sort(function (a, b) {
+          var av = (a.cells[col] ? a.cells[col].textContent : '').trim();
+          var bv = (b.cells[col] ? b.cells[col].textContent : '').trim();
+          var an = parseFloat(av), bn = parseFloat(bv);
+          var cmp = (!isNaN(an) && !isNaN(bn)) ? an - bn : av.localeCompare(bv, 'es');
+          return asc ? cmp : -cmp;
+        });
+        var tbody = table.querySelector('tbody');
+        rows.forEach(function (r) { tbody.appendChild(r); });
+      });
+    });
+  }
+
+  /* ── 4. Cargo pills ─────────────────────────────────────────────────── */
+  var SHOW = 3;
+
+  function initCargoPills() {
+    document.querySelectorAll('td.cargo-cell').forEach(function (cell) {
+      var items = cell.textContent.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+      cell.innerHTML = '';
+      items.forEach(function (item, i) {
+        var span = document.createElement('span');
+        span.className = 'cargo-pill' + (i >= SHOW ? ' hidden' : '');
+        span.textContent = item;
+        cell.appendChild(span);
+      });
+      if (items.length > SHOW) {
+        var btn = document.createElement('button');
+        btn.className = 'cargo-toggle';
+        btn.textContent = '+' + (items.length - SHOW) + ' más';
+        btn.addEventListener('click', function () {
+          var expanded = btn.textContent === 'Ver menos';
+          cell.querySelectorAll('.cargo-pill').forEach(function (p, i) {
+            p.classList.toggle('hidden', expanded && i >= SHOW);
+          });
+          btn.textContent = expanded ? '+' + (items.length - SHOW) + ' más' : 'Ver menos';
+        });
+        cell.appendChild(btn);
+      }
+    });
+  }
+
+  /* ── Init ────────────────────────────────────────────────────────────── */
+  window.addEventListener('DOMContentLoaded', function () {
+    setTimeout(animateBars, 80);
+    initSort();
+    initCargoPills();
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+  });
+}());
+</script>
+</body>
+</html>

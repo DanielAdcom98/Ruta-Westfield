@@ -1,0 +1,38 @@
+/* ─── Design tokens ───────────────────────────────────────────────────────── */
+:root {
+  --amarillo:  #FFC000;
+  --negro:     #000;
+  --gris-oscuro: #4F4F4F;
+  --gris-medio:  #9E9E9E;
+  --gris-claro:  #F9F9F9;
+  --gris-borde:  #EAEAEA;
+  --blanco:    #FFF;
+  --radius:    8px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Hub back-link (fixed badge on every page) ──────────────────────────── */
+.hub-back {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: var(--negro);
+  color: var(--amarillo);
+  font-family: 'Poppins', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  letter-spacing: .5px;
+  transition: opacity .15s;
+  white-space: nowrap;
+}
+.hub-back:hover { opacity: .75; }
