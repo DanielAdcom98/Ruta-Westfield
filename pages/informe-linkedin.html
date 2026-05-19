@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Westfield · Informe LinkedIn Leads</title>
+  <title>Westfield · Informe LinkedIn Leads B2C</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/shared.css">
   <style>
@@ -196,6 +196,23 @@
     .insights li { margin: 9px 0; font-size: .84rem; font-weight: 300; line-height: 1.55; }
     .insights li strong { font-weight: 700; color: var(--negro); }
     .small { color: var(--gris-medio); font-size: .72rem; font-weight: 300; }
+    .pdf-download {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 300;
+      border: 0;
+      border-radius: 999px;
+      background: var(--negro);
+      color: var(--amarillo);
+      padding: 11px 18px;
+      font-family: 'Poppins', sans-serif;
+      font-size: .76rem;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(0,0,0,.22);
+      cursor: pointer;
+    }
+    .pdf-download:hover { opacity: .9; }
 
     /* ── Responsive ── */
     @media (max-width: 980px) {
@@ -206,15 +223,23 @@
       .bar-value { text-align: left; }
       header h1 { font-size: 1.5rem; }
     }
+    @media print {
+      .hub-back, .sticky-nav, .pdf-download { display: none !important; }
+      body { background: white; }
+      main { max-width: none; padding: 18px; }
+      section { break-inside: avoid; }
+      .card, table { box-shadow: none; }
+    }
   </style>
 </head>
 <body>
 <a class="hub-back" href="../index.html">← Hub</a>
+<button class="pdf-download" type="button" onclick="window.print()">Descargar PDF</button>
 
 <header>
-  <div class="header-tag">LinkedIn Leads · Summer 2026</div>
-  <h1>Informe general de perfiles</h1>
-  <p>Lectura agregada del archivo unificado de leads. El foco está en la calidad profesional de la audiencia: cargos, seniority, función, empresa, industria, país, formación e intención declarada.</p>
+  <div class="header-tag">LinkedIn Leads B2C · Summer 2026</div>
+  <h1>Informe general de perfiles B2C</h1>
+  <p>Lectura agregada de leads B2C. El foco está en la calidad profesional de la audiencia: cargos, seniority, función, empresa, industria, país, formación e intención declarada.</p>
 </header>
 
 <nav class="sticky-nav" id="stickyNav">
@@ -231,8 +256,8 @@
   <section id="resumen">
     <div class="grid cards" style="margin-bottom:16px">
       <div class="card metric">
-        <div class="value">409</div>
-        <div class="label">Leads analizados</div>
+        <div class="value">287</div>
+        <div class="label">Leads B2C analizados</div>
       </div>
       <div class="card metric">
         <div class="value">408</div>
@@ -280,9 +305,7 @@
 
       <div class="card">
         <h2>Canal</h2>
-        <div class="bar-row"><div class="bar-label">B2C</div><div class="bar-track"><span data-w="70.2%"></span></div><div class="bar-value">287 <small>70.2%</small></div></div>
-        <div class="bar-row"><div class="bar-label">B2B</div><div class="bar-track"><span data-w="29.1%"></span></div><div class="bar-value">119 <small>29.1%</small></div></div>
-        <div class="bar-row"><div class="bar-label">Sin dato</div><div class="bar-track"><span data-w="0.7%"></span></div><div class="bar-value">3 <small>0.7%</small></div></div>
+        <div class="bar-row"><div class="bar-label">B2C</div><div class="bar-track"><span data-w="100%"></span></div><div class="bar-value">287 <small>100%</small></div></div>
       </div>
 
       <div class="card">
@@ -436,7 +459,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>México</td><td>155</td><td>37.9%</td><td>Mercado con mayor volumen total. Conviene separar mensajes B2B/evento de mensajes B2C de MBA para no mezclar intención.</td></tr>
+        <tr><td>México</td><td>155</td><td>37.9%</td><td>Mercado con mayor volumen total. Conviene mantener mensajes B2C de MBA con foco en avance profesional, flexibilidad y decisión individual.</td></tr>
         <tr><td>Perú</td><td>129</td><td>31.5%</td><td>Muy fuerte en volumen B2C. Buen mercado para mensajes de avance profesional, financiamiento y compatibilidad laboral.</td></tr>
         <tr><td>Colombia</td><td>89</td><td>21.8%</td><td>Buen balance entre volumen y cercanía regional. Recomendable reforzar autoridad institucional y networking.</td></tr>
         <tr><td>Estados Unidos</td><td>35</td><td>8.6%</td><td>Menor volumen, pero con perfiles potencialmente valiosos por capacidad de pago y exposición internacional.</td></tr>
@@ -500,7 +523,7 @@
       <li>Destacar el valor del MBA para perfiles gerenciales/directivos: liderazgo, visión estratégica, networking ejecutivo y crecimiento regional.</li>
       <li>Para coordinadores, supervisores y especialistas, enfocar el mensaje en movilidad profesional, ascenso y compatibilidad con la vida laboral.</li>
       <li>Usar <strong>Cargo</strong> como campo clave de scoring: seniority alto + formación universitaria + presupuesto informado + empresa/industria debe pasar a prioridad comercial alta.</li>
-      <li>Conservar Empresa e Industria como variables de priorización: ayudan a identificar leads corporativos, sectores atractivos y oportunidades de alianzas.</li>
+      <li>Conservar Empresa e Industria como variables de priorización: ayudan a entender contexto profesional, sectores atractivos y afinidad del perfil.</li>
       <li>Construir una ruta de seguimiento por nivel profesional: asesoría consultiva para directivos, nutrición de valor para mandos medios y orientación de plan de carrera para perfiles operativos.</li>
       <li>Usar la lectura de país para adaptar la promesa: financiamiento y flexibilidad en mercados de alto volumen, autoridad institucional y red internacional en mercados de mayor ticket potencial.</li>
     </ul>
